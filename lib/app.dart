@@ -55,7 +55,7 @@ class _SmartMaidAppState extends ConsumerState<SmartMaidApp> {
     final settings = ref.watch(settingsProvider);
 
     return MaterialApp.router(
-      title: 'Smart Maid',
+      title: 'شغّالتي',
       debugShowCheckedModeBanner: false,
       routerConfig: routerConfig,
       theme: AppTheme.lightTheme,

@@ -152,14 +152,14 @@ class InvoiceScreen extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      gradient: AppColors.heroGradient,
-                      borderRadius: BorderRadius.circular(14),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(14),
+                    child: Image.asset(
+                      'assets/icon/icon.png',
+                      width: 48,
+                      height: 48,
+                      fit: BoxFit.cover,
                     ),
-                    child: const Icon(Icons.cleaning_services_rounded,
-                        color: Colors.white, size: 24),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,

@@ -1,104 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<!-- معلومات التطبيق الأساسية -->
-	<key>CFBundleDevelopmentRegion</key>
-	<string>ar</string>
-	<key>CFBundleDisplayName</key>
-	<string>شغّالتي</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>شغّالتي</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-
-	<!-- iOS Requirements -->
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-
-	<!-- الاتجاه — Portrait فقط للهاتف -->
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-
-	<!-- أداء عالٍ -->
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-
-	<!-- الشريط الشفاف -->
-	<key>UIStatusBarHidden</key>
-	<false/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-
-	<!-- أذونات iOS — رسائل واضحة بالعربية -->
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>يحتاج التطبيق إلى موقعك لعرض العاملات القريبة منك وحساب وقت الوصول</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>يحتاج التطبيق إلى موقعك لتقديم خدمات دقيقة في منطقتك</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>يحتاج التطبيق إلى موقعك لعرض العاملات القريبة منك</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>يستخدم التطبيق الميكروفون للبحث الصوتي الذكي عن العاملات</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>يستخدم التطبيق التعرف على الصوت للبحث عن الخدمات بصوتك</string>
-	<key>NSCameraUsageDescription</key>
-	<string>تحتاج هذه الخاصية إلى الوصول إلى الكاميرا لتحميل صورة ملفك الشخصي</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>يحتاج التطبيق إلى الوصول إلى مكتبة صورك لتحديث صورة ملفك الشخصي</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>يحتاج التطبيق إلى حفظ الصور في مكتبتك</string>
-	<key>NSContactsUsageDescription</key>
-	<string>يستخدم التطبيق جهات الاتصال لتسهيل الإحالات لأصدقائك</string>
-
-	<!-- شبكة محلية — للتطوير -->
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>يستخدم التطبيق الشبكة المحلية للاتصال بالخادم</string>
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_flutter._tcp</string>
-	</array>
-
-	<!-- App Transport Security — السماح بـ HTTP للتطوير -->
-	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-
-	<!-- دعم العربية -->
-	<key>CFBundleLocalizations</key>
-	<array>
+		<!-- معلومات التطبيق الأساسية -->
+		<key>CFBundleDevelopmentRegion</key>
 		<string>ar</string>
-		<string>en</string>
-	</array>
-	<key>CFBundlePrimaryLanguage</key>
-	<string>ar</string>
-</dict>
+		<key>CFBundleDisplayName</key>
+		<string>شغّالتي</string>
+		<key>CFBundleExecutable</key>
+		<string>$(EXECUTABLE_NAME)</string>
+		<key>CFBundleIdentifier</key>
+		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleName</key>
+		<string>شغّالتي</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleShortVersionString</key>
+		<string>$(FLUTTER_BUILD_NAME)</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleVersion</key>
+		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<!-- iOS Requirements -->
+		<key>LSRequiresIPhoneOS</key>
+		<true/>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
+		<key>UIMainStoryboardFile</key>
+		<string>Main</string>
+		<!-- الاتجاه — Portrait فقط للهاتف -->
+		<key>UISupportedInterfaceOrientations</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+		</array>
+		<key>UISupportedInterfaceOrientations~ipad</key>
+		<array>
+			<string>UIInterfaceOrientationPortrait</string>
+			<string>UIInterfaceOrientationPortraitUpsideDown</string>
+			<string>UIInterfaceOrientationLandscapeLeft</string>
+			<string>UIInterfaceOrientationLandscapeRight</string>
+		</array>
+		<!-- أداء عالٍ -->
+		<key>CADisableMinimumFrameDurationOnPhone</key>
+		<true/>
+		<key>UIApplicationSupportsIndirectInputEvents</key>
+		<true/>
+		<!-- الشريط الشفاف -->
+		<key>UIStatusBarHidden</key>
+		<false/>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
+		<!-- أذونات iOS — رسائل واضحة بالعربية -->
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>يحتاج التطبيق إلى موقعك لعرض العاملات القريبة منك وحساب وقت الوصول</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>يحتاج التطبيق إلى موقعك لتقديم خدمات دقيقة في منطقتك</string>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>يحتاج التطبيق إلى موقعك لعرض العاملات القريبة منك</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>يستخدم التطبيق الميكروفون للبحث الصوتي الذكي عن العاملات</string>
+		<key>NSSpeechRecognitionUsageDescription</key>
+		<string>يستخدم التطبيق التعرف على الصوت للبحث عن الخدمات بصوتك</string>
+		<key>NSCameraUsageDescription</key>
+		<string>تحتاج هذه الخاصية إلى الوصول إلى الكاميرا لتحميل صورة ملفك الشخصي</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>يحتاج التطبيق إلى الوصول إلى مكتبة صورك لتحديث صورة ملفك الشخصي</string>
+		<key>NSPhotoLibraryAddUsageDescription</key>
+		<string>يحتاج التطبيق إلى حفظ الصور في مكتبتك</string>
+		<key>NSContactsUsageDescription</key>
+		<string>يستخدم التطبيق جهات الاتصال لتسهيل الإحالات لأصدقائك</string>
+		<!-- شبكة محلية — للتطوير -->
+		<key>NSLocalNetworkUsageDescription</key>
+		<string>يستخدم التطبيق الشبكة المحلية للاتصال بالخادم</string>
+		<key>NSBonjourServices</key>
+		<array>
+			<string>_flutter._tcp</string>
+		</array>
+		<!-- App Transport Security — السماح بـ HTTP للتطوير -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
+		<!-- دعم العربية -->
+		<key>CFBundleLocalizations</key>
+		<array>
+			<string>ar</string>
+			<string>en</string>
+		</array>
+		<key>CFBundlePrimaryLanguage</key>
+		<string>ar</string>
+	</dict>
 </plist>

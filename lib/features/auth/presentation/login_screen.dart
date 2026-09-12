@@ -53,15 +53,59 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 32),
-              // Logo
-              Container(
-                width: 72, height: 72,
-                decoration: BoxDecoration(gradient: AppColors.heroGradient, borderRadius: BorderRadius.circular(22)),
-                child: const Icon(Icons.cleaning_services_rounded, color: Colors.white, size: 36),
-              ),
-              const SizedBox(height: 28),
-              Text('أهلاً بك في SmartMaid',
-                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900, color: isDark ? Colors.white : AppColors.primary)),
+              // ── شعار شغّالتي ──────────────────────────────────────
+              Row(children: [
+                Container(
+                  width: 76,
+                  height: 76,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(22),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withValues(alpha: .25),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(22),
+                    child: Image.asset(
+                      'assets/icon/icon.png',
+                      width: 76,
+                      height: 76,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'شغّالتي',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900,
+                        color: isDark ? Colors.white : AppColors.primary,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                    Text(
+                      'SmartMaid',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.muted,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+              const SizedBox(height: 32),
+              Text('أهلاً بك',
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900,
+                      color: isDark ? Colors.white : AppColors.primary)),
               const SizedBox(height: 8),
               Text('أدخل رقم هاتفك للمتابعة',
                   style: TextStyle(fontSize: 15, color: AppColors.muted)),

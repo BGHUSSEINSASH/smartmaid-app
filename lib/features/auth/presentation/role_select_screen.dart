@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../data/models.dart';
+import '../../../widgets/app_logo.dart';
 
 /// شاشة اختيار نوع الحساب — نقطة الانطلاق لكل تسجيل
 class RoleSelectScreen extends StatelessWidget {
@@ -29,18 +30,7 @@ class RoleSelectScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 24),
-                Center(
-                  child: Container(
-                    width: 74,
-                    height: 74,
-                    decoration: BoxDecoration(
-                      gradient: AppColors.heroGradient,
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                    child: const Icon(Icons.cleaning_services_rounded,
-                        size: 36, color: Colors.white),
-                  ),
-                ),
+                const Center(child: AppLogo(size: 76)),
                 const SizedBox(height: 20),
                 const Text('أنشئ حسابك',
                     textAlign: TextAlign.center,
