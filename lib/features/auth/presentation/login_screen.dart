@@ -55,46 +55,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 32),
               // ── شعار شغّالتي ──────────────────────────────────────
               Row(children: [
-                Container(
-                  width: 76,
-                  height: 76,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(22),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary.withValues(alpha: .25),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(22),
-                    child: Image.asset(
-                      'assets/icon/icon.png',
-                      width: 76,
-                      height: 76,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                Image.asset(
+                  'assets/icon/icon_original.png',
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.contain,
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 14),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'شغّالتي',
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 30,
                         fontWeight: FontWeight.w900,
-                        color: isDark ? Colors.white : AppColors.primary,
+                        color: isDark ? Colors.white : const Color(0xFF03045A),
                         letterSpacing: -0.5,
                       ),
                     ),
                     Text(
                       'SmartMaid',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                         color: AppColors.muted,
                       ),

@@ -60,36 +60,18 @@ class AppLogo extends StatelessWidget {
   }
 }
 
-/// الصورة وحدها مع ظل
+/// الصورة وحدها
 class _LogoImage extends StatelessWidget {
   final double size;
   const _LogoImage({required this.size});
 
   @override
   Widget build(BuildContext context) {
-    final r = size * 0.28;
-    return Container(
+    return Image.asset(
+      'assets/icon/icon_original.png',
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(r),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.28),
-            blurRadius: size * 0.3,
-            offset: Offset(0, size * 0.1),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(r),
-        child: Image.asset(
-          'assets/icon/icon.png',
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-        ),
-      ),
+      fit: BoxFit.contain,
     );
   }
 }

@@ -74,25 +74,11 @@ class _MaintenanceScreenState extends ConsumerState<MaintenanceScreen>
                 scale: _pulse,
                 child: GestureDetector(
                   onTap: _onLogoTap,
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      gradient: AppColors.heroGradient,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primary.withValues(alpha: .3),
-                          blurRadius: 30,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.construction_rounded,
-                      color: Colors.white,
-                      size: 56,
-                    ),
+                  child: Image.asset(
+                    'assets/icon/icon_original.png',
+                    width: 130,
+                    height: 130,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),

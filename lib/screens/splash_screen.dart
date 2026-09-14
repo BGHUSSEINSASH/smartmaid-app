@@ -53,93 +53,77 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(gradient: AppColors.heroGradient),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // ── شعار شغّالتي ────────────────────────────────────
-              AnimatedBuilder(
-                animation: _ctrl,
-                builder: (_, child) => Transform.scale(
-                  scale: _scale.value,
-                  child: Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
-                ),
-                child: Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.13),
-                    borderRadius: BorderRadius.circular(34),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.25),
-                        blurRadius: 32,
-                        offset: const Offset(0, 12),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(34),
-                    child: Image.asset(
-                      'assets/icon/icon.png',
-                      width: 120,
-                      height: 120,
-                      fit: BoxFit.cover,
+      backgroundColor: isDark ? const Color(0xFF03045A) : Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // ── شعار شغّالتي ──────────────────────────────────────────
+            AnimatedBuilder(
+              animation: _ctrl,
+              builder: (_, child) => Transform.scale(
+                scale: _scale.value,
+                child: Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
+              ),
+              child: Image.asset(
+                'assets/icon/icon_original.png',
+                width: 160,
+                height: 160,
+                fit: BoxFit.contain,
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // ── اسم التطبيق ──────────────────────────────────────────
+            AnimatedBuilder(
+              animation: _fade,
+              builder: (_, child) => Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
+              child: Column(
+                children: [
+                  Text(
+                    'شغّالتي',
+                    style: TextStyle(
+                      fontSize: 38,
+                      fontWeight: FontWeight.w900,
+                      color: isDark ? Colors.white : const Color(0xFF03045A),
+                      letterSpacing: -0.5,
                     ),
                   ),
-                ),
-              ),
-
-              const SizedBox(height: 28),
-
-              // ── اسم التطبيق ──────────────────────────────────────
-              AnimatedBuilder(
-                animation: _fade,
-                builder: (_, child) => Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
-                child: Column(
-                  children: [
-                    const Text(
-                      'شغّالتي',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -0.5,
-                      ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'خدماتك المنزلية بلمسة واحدة',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: isDark
+                          ? Colors.white.withValues(alpha: 0.65)
+                          : const Color(0xFF6B7280),
                     ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'خدماتك المنزلية بلمسة واحدة',
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.80),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 48),
-
-              // ── مؤشر تحميل ───────────────────────────────────────
-              AnimatedBuilder(
-                animation: _fade,
-                builder: (_, child) => Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
-                child: const SizedBox(
-                  width: 28,
-                  height: 28,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.5,
-                    color: Colors.white70,
                   ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 52),
+
+            // ── مؤشر تحميل ───────────────────────────────────────────
+            AnimatedBuilder(
+              animation: _fade,
+              builder: (_, child) => Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
+              child: SizedBox(
+                width: 28,
+                height: 28,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: isDark ? Colors.white54 : const Color(0xFF03045A).withValues(alpha: 0.4),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
