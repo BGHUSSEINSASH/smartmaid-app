@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../core/responsive/breakpoints.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/models.dart';
@@ -305,50 +306,37 @@ class _FloatingNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // ألوان متمايزة بين light و dark
-    final bgColor = isDark
-        ? const Color(0xFF0D0D35)   // كحلي داكن في dark mode
-        : Colors.white;
+    final bgColor = isDark ? const Color(0xFF0D0D35) : Colors.white;
     final borderColor = isDark
-        ? Colors.white.withValues(alpha: 0.07)
+        ? Colors.white.withOpacity(0.07)
         : const Color(0xFFE8EDF8);
 
+    // ارتفاع NavBar ومسافاته نسبيان حسب حجم الشاشة
+    final barHeight = Bp.navBarHeight(context);
+    final margin    = Bp.navBarMargin(context);
+    final radius    = Bp.navBarRadius(context);
+
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      margin: margin,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(radius),
         border: Border.all(color: borderColor, width: 1),
         boxShadow: isDark
-            ? [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.40),
-                  blurRadius: 20,
-                  offset: const Offset(0, 6),
-                ),
-              ]
+            ? [BoxShadow(color: Colors.black.withOpacity(0.40), blurRadius: 20, offset: const Offset(0, 6))]
             : [
-                BoxShadow(
-                  color: const Color(0xFF03045A).withValues(alpha: 0.08),
-                  blurRadius: 20,
-                  spreadRadius: 0,
-                  offset: const Offset(0, 4),
-                ),
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
+                BoxShadow(color: const Color(0xFF03045A).withOpacity(0.08), blurRadius: 20, offset: const Offset(0, 4)),
+                BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 2)),
               ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(29),
+        borderRadius: BorderRadius.circular(radius - 1),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
           child: SafeArea(
             top: false,
             child: SizedBox(
-              height: 68,
+              height: barHeight,
               child: Row(
                 children: [
                   for (var i = 0; i < tabs.length; i++)

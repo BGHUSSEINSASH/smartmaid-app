@@ -75,9 +75,11 @@ class _SmartMaidAppState extends ConsumerState<SmartMaidApp> {
         final security = ref.watch(securityProvider);
         final loggedIn = ref.watch(authProvider).isLoggedIn;
         final showLock = loggedIn && security.mustUnlock;
+        // textScale: نقيّد بين 0.85 و 1.3 لمنع نصوص كبيرة/صغيرة جداً
+        final scale = (settings.textScale).clamp(0.85, 1.3);
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(
-            textScaler: TextScaler.linear(settings.textScale),
+            textScaler: TextScaler.linear(scale),
           ),
           child: showLock
               ? AppLockScreen(

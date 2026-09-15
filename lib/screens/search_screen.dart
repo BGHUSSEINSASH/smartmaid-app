@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/ai/assistant_engine.dart';
+import '../core/responsive/breakpoints.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/demo_data.dart';
@@ -278,22 +279,48 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         // ── قائمة العاملات ────────────────────────────────────────────
         if (!_loading && workers.isNotEmpty)
           SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
-            sliver: SliverList(delegate: SliverChildBuilderDelegate(
-              (ctx, i) {
-                final w = workers[i];
-                final score = _matchScore(w.id);
-                final label = _matchLabel(w.id);
-                return _WorkerCard(
-                  worker: w,
-                  currency: currency,
-                  aiLabel: label,
-                  aiScore: score,
-                  onTap: () => Navigator.push(ctx, MaterialPageRoute(builder: (_) => WorkerProfileScreen(worker: w))),
-                );
-              },
-              childCount: workers.length,
-            )),
+            padding: EdgeInsets.fromLTRB(
+              Bp.hPad(context), 0,
+              Bp.hPad(context),
+              Bp.listBottomPad(context),
+            ),
+            sliver: Bp.isPhone(context)
+                ? SliverList(delegate: SliverChildBuilderDelegate(
+                    (ctx, i) {
+                      final w = workers[i];
+                      return _WorkerCard(
+                        worker: w,
+                        currency: currency,
+                        aiLabel: _matchLabel(w.id),
+                        aiScore: _matchScore(w.id),
+                        onTap: () => Navigator.push(ctx,
+                            MaterialPageRoute(builder: (_) => WorkerProfileScreen(worker: w))),
+                      );
+                    },
+                    childCount: workers.length,
+                  ))
+                : SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (ctx, i) {
+                        final w = workers[i];
+                        return _WorkerCard(
+                          worker: w,
+                          currency: currency,
+                          aiLabel: _matchLabel(w.id),
+                          aiScore: _matchScore(w.id),
+                          onTap: () => Navigator.push(ctx,
+                              MaterialPageRoute(builder: (_) => WorkerProfileScreen(worker: w))),
+                        );
+                      },
+                      childCount: workers.length,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: Bp.gridCols(context),
+                      childAspectRatio: Bp.isTablet(context) ? 1.8 : 1.6,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                  ),
           ),
       ]),
     );

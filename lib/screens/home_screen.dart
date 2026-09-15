@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/nav/app_nav.dart';
+import '../core/responsive/breakpoints.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/demo_data.dart';
@@ -632,26 +633,52 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             )
           else
           SliverPadding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (ctx, i) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: _RevealOnBuild(
-                    delay: Duration(milliseconds: 70 * i),
-                    child: _WorkerCard(
-                      worker: filtered[i],
-                      currency: currency,
-                      onTap: () => AppNav.pushSlide(
-                          context,
-                          WorkerProfileScreen(
-                              worker: filtered[i])),
+            padding: EdgeInsets.fromLTRB(
+              Bp.hPad(context), 0,
+              Bp.hPad(context),
+              Bp.listBottomPad(context),
+            ),
+            sliver: Bp.isPhone(context)
+                ? SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (ctx, i) => Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: _RevealOnBuild(
+                          delay: Duration(milliseconds: 70 * i),
+                          child: _WorkerCard(
+                            worker: filtered[i],
+                            currency: currency,
+                            onTap: () => AppNav.pushSlide(
+                                context,
+                                WorkerProfileScreen(
+                                    worker: filtered[i])),
+                        ),
+                      ),
+                    ),
+                    childCount: filtered.length,
+                  ),
+                )
+                : SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (ctx, i) => _RevealOnBuild(
+                        delay: Duration(milliseconds: 50 * i),
+                        child: _WorkerCard(
+                          worker: filtered[i],
+                          currency: currency,
+                          onTap: () => AppNav.pushSlide(
+                              context,
+                              WorkerProfileScreen(worker: filtered[i])),
+                        ),
+                      ),
+                      childCount: filtered.length,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: Bp.gridCols(context),
+                      childAspectRatio: Bp.isTablet(context) ? 2.6 : 2.4,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
                     ),
                   ),
-                ),
-                childCount: filtered.length,
-              ),
-            ),
           ),
         ],
         ),

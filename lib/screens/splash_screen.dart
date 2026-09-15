@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/painter/logo_painter.dart';
+import '../core/responsive/breakpoints.dart';
 import '../core/session/session_store.dart';
 import '../core/storage/local_store.dart';
 import '../core/theme/app_theme.dart';
@@ -54,7 +55,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark    = Theme.of(context).brightness == Brightness.dark;
+    // قيم نسبية حسب حجم الشاشة
+    final logoSz    = Bp.logoSize(context);
+    final titleSz   = Bp.titleFontSize(context);
+    final subtitleSz= Bp.subtitleFontSize(context);
+    final gapV      = (Bp.h(context) * 0.04).clamp(20.0, 48.0);
 
     return Scaffold(
       backgroundColor: isDark ? AppColors.backgroundDark : Colors.white,
@@ -62,23 +68,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ── شعار شغّالتي ──────────────────────────────────────────
+            // ── شعار شغّالتي ──────────────────────────────────────
             AnimatedBuilder(
               animation: _ctrl,
               builder: (_, child) => Transform.scale(
                 scale: _scale.value,
                 child: Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
               ),
-              child: LogoWidget(
-                size: 160,
-                darkBackground: isDark,
-                withShadow: !isDark,
-              ),
+              child: LogoWidget(size: logoSz, darkBackground: isDark),
             ),
 
-            const SizedBox(height: 32),
+            SizedBox(height: gapV),
 
-            // ── اسم التطبيق ──────────────────────────────────────────
+            // ── اسم التطبيق ──────────────────────────────────────
             AnimatedBuilder(
               animation: _fade,
               builder: (_, child) => Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
@@ -87,20 +89,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   Text(
                     'شغّالتي',
                     style: TextStyle(
-                      fontSize: 38,
+                      fontSize: titleSz,
                       fontWeight: FontWeight.w900,
                       color: isDark ? Colors.white : const Color(0xFF03045A),
                       letterSpacing: -0.5,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: gapV * 0.2),
                   Text(
                     'خدماتك المنزلية بلمسة واحدة',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: subtitleSz,
                       fontWeight: FontWeight.w500,
                       color: isDark
-                          ? Colors.white.withValues(alpha: 0.65)
+                          ? Colors.white.withOpacity(0.65)
                           : const Color(0xFF6B7280),
                     ),
                   ),
@@ -108,9 +110,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
               ),
             ),
 
-            const SizedBox(height: 52),
+            SizedBox(height: gapV * 1.3),
 
-            // ── مؤشر تحميل ───────────────────────────────────────────
+            // ── مؤشر تحميل ───────────────────────────────────────
             AnimatedBuilder(
               animation: _fade,
               builder: (_, child) => Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
@@ -119,7 +121,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                 height: 28,
                 child: CircularProgressIndicator(
                   strokeWidth: 2.5,
-                  color: isDark ? Colors.white54 : const Color(0xFF03045A).withValues(alpha: 0.4),
+                  color: isDark
+                      ? Colors.white54
+                      : const Color(0xFF03045A).withOpacity(0.4),
                 ),
               ),
             ),

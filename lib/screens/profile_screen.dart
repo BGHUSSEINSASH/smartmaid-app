@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../core/responsive/breakpoints.dart';
 import '../core/theme/app_theme.dart';
 import '../widgets/ai_app_bar_button.dart';
 import '../core/theme/adaptive.dart';
@@ -49,9 +50,14 @@ class ProfileScreen extends ConsumerWidget {
         title: const Text('حسابي'),
         actions: [aiAppBarButton(context, initialMessage: 'كيف أحسن ملفي الشخصي؟')],
       ),
-      body: ListView(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, bottomPad),
-        children: [
+      body: ContentBox(
+        maxWidth: Bp.contentMax,
+        child: ListView(
+          padding: EdgeInsets.fromLTRB(
+            Bp.hPad(context), Bp.vPad(context),
+            Bp.hPad(context), bottomPad,
+          ),
+          children: [
           // ── بطاقة المستخدم ─────────────────────────────────────────
           Container(
             padding: const EdgeInsets.all(18),
@@ -340,6 +346,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
           ]),
         ],
+        ),
       ),
     );
   }

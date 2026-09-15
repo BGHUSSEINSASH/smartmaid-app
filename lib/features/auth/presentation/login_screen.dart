@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/painter/logo_painter.dart';
+import '../../../core/responsive/breakpoints.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../providers/auth_provider.dart';
 
@@ -44,23 +45,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return Scaffold(
-      backgroundColor: isDark ? AppColors.bgDeep : AppColors.bg,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 32),
-              // ── شعار شغّالتي ──────────────────────────────────────
-              Row(children: [
-                LogoWidget(
-                  size: 80,
-                  darkBackground: isDark,
-                  withShadow: !isDark,
-                ),
+    final isDark  = Theme.of(context).brightness == Brightness.dark;
+    final hPad    = Bp.isPhone(context) ? 28.0 : 32.0;
+    final logoSz  = Bp.isPhone(context) ? 80.0 : 96.0;
+
+    final content = SingleChildScrollView(
+      padding: EdgeInsets.all(hPad),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: Bp.isPhone(context) ? 32.0 : 16.0),
+          // ── شعار شغّالتي ──────────────────────────────────────
+          Row(children: [
+            LogoWidget(size: logoSz, darkBackground: isDark),
                 const SizedBox(width: 14),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,7 +167,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               )),
             ],
           ),
-        ),
+        );
+
+    return Scaffold(
+      backgroundColor: isDark ? AppColors.bgDeep : AppColors.bg,
+      body: SafeArea(
+        child: Bp.isPhone(context)
+            ? content
+            : Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: Bp.formMax),
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      side: BorderSide(color: AppColors.stroke),
+                    ),
+                    child: content,
+                  ),
+                ),
+              ),
       ),
     );
   }
