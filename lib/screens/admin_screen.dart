@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../core/theme/app_theme.dart';
@@ -26,6 +26,7 @@ import '../providers/staff_provider.dart';
 import '../data/models.dart';
 import 'admin_compensations_screen.dart';
 import 'maintenance_screen.dart';
+import 'privacy_policy_screen.dart';
 
 class AdminScreen extends ConsumerStatefulWidget {
   const AdminScreen({super.key});
@@ -213,6 +214,7 @@ class _AdminScreenState extends ConsumerState<AdminScreen> {
                       _ActionCard(title: 'فريق الإدارة', icon: Icons.manage_accounts_rounded, color: const Color(0xFFF3E8FF), iconColor: const Color(0xFF9333EA), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminStaffScreen()))),
                       if (_hasPerm(StaffPermission.issueCompensations))
                         _ActionCard(title: 'التعويضات', icon: Icons.volunteer_activism_rounded, color: const Color(0xFFFFF1F2), iconColor: const Color(0xFFE11D48), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCompensationsScreen()))),
+                      _ActionCard(title: 'سياسة الخصوصية', icon: Icons.privacy_tip_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0369A1), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()))),
                     ],
                   ),
 
@@ -575,5 +577,6 @@ class _MaintenanceQuickCard extends ConsumerWidget {
     );
   }
 }
+
 
 

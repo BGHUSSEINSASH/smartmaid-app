@@ -48,6 +48,7 @@ import '../../screens/payment_cards_screen.dart';
 import '../../screens/assistant_screen.dart';
 import '../../screens/edit_profile_screen.dart';
 import '../../screens/invoice_screen.dart';
+import '../../screens/privacy_policy_screen.dart';
 import '../../screens/maintenance_screen.dart';
 import '../../screens/company_kyc_pending_screen.dart';
 import '../../providers/platform_control_provider.dart';
@@ -443,6 +444,12 @@ GoRouter buildRouter(
         builder: (context, state) => const MaintenanceScreen(),
       ),
       GoRoute(
+        path: '/privacy-policy',
+        name: 'privacy-policy',
+        pageBuilder: (context, state) =>
+            SlidePage(key: state.pageKey, child: const PrivacyPolicyScreen()),
+      ),
+      GoRoute(
         path: '/company/kyc-pending',
         name: 'company-kyc-pending',
         builder: (context, state) => const CompanyKycPendingScreen(),
@@ -468,4 +475,5 @@ class SlidePage<T> extends CustomTransitionPage<T> {
           },
         );
 }
+
 

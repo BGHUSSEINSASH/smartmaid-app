@@ -342,6 +342,7 @@ class WorkerModel {
   final String about;
   final String? companyId;
   final bool verified;
+  final String? nationalityCountry;
 
   const WorkerModel({
     required this.id,
@@ -358,6 +359,7 @@ class WorkerModel {
     required this.about,
     this.companyId,
     this.verified = false,
+    this.nationalityCountry,
   });
 
   String get image => imageUrl;
@@ -948,4 +950,6 @@ extension TicketPriorityX on TicketPriority {
     TicketPriority.urgent => const Color(0xFFEF4444),
   };
 }
+
+
 

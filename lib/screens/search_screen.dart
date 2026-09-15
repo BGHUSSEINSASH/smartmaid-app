@@ -433,3 +433,4 @@ class _ShimmerCardState extends State<_ShimmerCard> with SingleTickerProviderSta
     );
   }
 }
+

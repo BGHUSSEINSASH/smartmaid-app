@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/theme/app_theme.dart';
@@ -138,7 +139,7 @@ class SettingsScreen extends ConsumerWidget {
                 title: Text(AppLocalizations.of(context)!.aboutApp,
                     style:
                         TextStyle(fontWeight: FontWeight.w700, fontSize: 14.5)),
-                subtitle: const Text('Smart Maid v1.0.0',
+                subtitle: const Text('شغّالتي v1.1.0',
                     style: TextStyle(fontSize: 12)),
                 onTap: () => showAboutDialog(context: context),
               ),
@@ -288,5 +289,6 @@ class _GroupCard extends StatelessWidget {
     );
   }
 }
+
 
 
