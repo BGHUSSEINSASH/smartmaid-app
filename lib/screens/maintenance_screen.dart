@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../core/painter/logo_painter.dart';
 import '../core/theme/app_theme.dart';
+import '../core/theme/adaptive.dart';
 import '../providers/platform_control_provider.dart';
 import '../providers/auth_provider.dart';
 import '../data/models.dart';
@@ -74,11 +76,10 @@ class _MaintenanceScreenState extends ConsumerState<MaintenanceScreen>
                 scale: _pulse,
                 child: GestureDetector(
                   onTap: _onLogoTap,
-                  child: Image.asset(
-                    'assets/icon/icon_original.png',
-                    width: 130,
-                    height: 130,
-                    fit: BoxFit.contain,
+                  child: LogoWidget(
+                    size: 130,
+                    darkBackground: isDark,
+                    withShadow: !isDark,
                   ),
                 ),
               ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../core/theme/app_theme.dart';
+import '../core/painter/logo_painter.dart';
 
-/// شعار شغّالتي — widget مشترك للاستخدام في كل الشاشات
+/// شعار شغّالتي — widget مشترك
 class AppLogo extends StatelessWidget {
   final double size;
   final bool showText;
@@ -24,8 +25,8 @@ class AppLogo extends StatelessWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _LogoImage(size: size),
-          SizedBox(width: size * 0.2),
+          LogoWidget(size: size, darkBackground: isDark, withShadow: !isDark),
+          SizedBox(width: size * 0.18),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -33,7 +34,7 @@ class AppLogo extends StatelessWidget {
               Text(
                 'شغّالتي',
                 style: TextStyle(
-                  fontSize: size * 0.42,
+                  fontSize: size * 0.40,
                   fontWeight: FontWeight.w900,
                   color: isDark ? Colors.white : AppColors.primary,
                   letterSpacing: -0.5,
@@ -43,10 +44,10 @@ class AppLogo extends StatelessWidget {
                 Text(
                   'SmartMaid',
                   style: TextStyle(
-                    fontSize: size * 0.22,
+                    fontSize: size * 0.21,
                     fontWeight: FontWeight.w500,
                     color: isDark
-                        ? Colors.white.withValues(alpha: 0.6)
+                        ? Colors.white.withOpacity(0.6)
                         : AppColors.muted,
                   ),
                 ),
@@ -56,23 +57,7 @@ class AppLogo extends StatelessWidget {
       );
     }
 
-    return _LogoImage(size: size);
-  }
-}
-
-/// الصورة وحدها
-class _LogoImage extends StatelessWidget {
-  final double size;
-  const _LogoImage({required this.size});
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/icon/icon_original.png',
-      width: size,
-      height: size,
-      fit: BoxFit.contain,
-    );
+    return LogoWidget(size: size, darkBackground: isDark, withShadow: !isDark);
   }
 }
 
@@ -85,3 +70,4 @@ class AppLogoSmall extends StatelessWidget {
     return const AppLogo(size: 36, showText: true);
   }
 }
+

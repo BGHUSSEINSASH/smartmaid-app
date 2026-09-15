@@ -262,13 +262,21 @@ class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surfaceDark,
-        indicatorColor: AppColors.primarySoft,
+        indicatorColor: AppColors.primary.withOpacity(0.25),
         shadowColor: Colors.transparent,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);
           return TextStyle(
             fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
-            color: selected ? AppColors.primary : Colors.white70,
+            // إصلاح Dark Mode: أبيض للنشط بدلاً من primary (#03045A غير مقروء)
+            color: selected ? Colors.white : Colors.white60,
+          );
+        }),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          final selected = states.contains(WidgetState.selected);
+          return IconThemeData(
+            color: selected ? Colors.white : Colors.white54,
+            size: 22,
           );
         }),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../core/painter/logo_painter.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../providers/auth_provider.dart';
 
@@ -55,11 +56,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 32),
               // ── شعار شغّالتي ──────────────────────────────────────
               Row(children: [
-                Image.asset(
-                  'assets/icon/icon_original.png',
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.contain,
+                LogoWidget(
+                  size: 80,
+                  darkBackground: isDark,
+                  withShadow: !isDark,
                 ),
                 const SizedBox(width: 14),
                 Column(

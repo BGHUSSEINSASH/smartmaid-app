@@ -442,7 +442,7 @@ class _BookingFab extends StatelessWidget {
   }
 }
 
-/// عنصر تبويب واحد — تصميم نظيف بدون overflow
+/// عنصر تبويب — تصميم ثابت متناسق بدون layout shift
 class _NavItem extends StatelessWidget {
   final _Tab tab;
   final bool selected;
@@ -458,81 +458,109 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ألوان واضحة في light و dark
+    // إصلاح M6: ألوان واضحة في كلا الوضعين — withOpacity بدلاً من withValues
     final activeColor   = isDark ? Colors.white         : const Color(0xFF03045A);
     final inactiveColor = isDark
-        ? Colors.white.withValues(alpha: 0.38)
+        ? Colors.white.withOpacity(0.42)
         : const Color(0xFF8FA3C0);
-    final pillBg = isDark
-        ? Colors.white.withValues(alpha: 0.11)
-        : const Color(0xFF03045A).withValues(alpha: 0.09);
+    final dotColor = isDark ? Colors.white : const Color(0xFF03045A);
+    final pillBg   = isDark
+        ? Colors.white.withOpacity(0.12)
+        : const Color(0xFF03045A).withOpacity(0.09);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: SizedBox(
         height: 68,
-        child: Center(
-          child: selected
-              // ── النشط: Pill أيقونة + نص ──────────────────────────────
-              ? TweenAnimationBuilder<double>(
-                  tween: Tween(begin: 0.88, end: 1.0),
-                  duration: const Duration(milliseconds: 260),
-                  curve: Curves.easeOutBack,
-                  builder: (_, scale, child) =>
-                      Transform.scale(scale: scale, child: child),
-                  child: Container(
-                    height: 40,
-                    padding: const EdgeInsets.symmetric(horizontal: 14),
-                    decoration: BoxDecoration(
-                      color: pillBg,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          tab.selectedIcon ?? tab.icon,
-                          size: 20,
-                          color: activeColor,
-                        ),
-                        const SizedBox(width: 6),
-                        Flexible(
-                          child: Text(
-                            tab.label,
-                            style: TextStyle(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.w800,
-                              color: activeColor,
-                              letterSpacing: 0.2,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+        // ── Layout ثابت دائماً: Column(dot + icon + text) ─────────────
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Dot مؤشر أعلى الأيقونة
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 280),
+              curve: Curves.easeOutBack,
+              width:  selected ? 5.0 : 0.0,
+              height: selected ? 5.0 : 0.0,
+              margin: const EdgeInsets.only(bottom: 4),
+              decoration: BoxDecoration(
+                color: dotColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+
+            // ── الأيقونة مع Pill خلفية ──────────────────────────────
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 260),
+              curve: Curves.easeOutCubic,
+              padding: EdgeInsets.symmetric(
+                horizontal: selected ? 12.0 : 0.0,
+                vertical:   4.0,
+              ),
+              decoration: BoxDecoration(
+                color: selected ? pillBg : Colors.transparent,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // الأيقونة — نفس الحجم دائماً
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 1.0, end: selected ? 1.08 : 1.0),
+                    duration: const Duration(milliseconds: 280),
+                    curve: Curves.easeOutBack,
+                    builder: (_, scale, child) =>
+                        Transform.scale(scale: scale, child: child),
+                    child: Icon(
+                      selected ? (tab.selectedIcon ?? tab.icon) : tab.icon,
+                      size: 22,
+                      color: selected ? activeColor : inactiveColor,
                     ),
                   ),
-                )
-              // ── غير النشط: أيقونة + نص صغير ──────────────────────────
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(tab.icon, size: 22, color: inactiveColor),
-                    const SizedBox(height: 3),
-                    Text(
-                      tab.label,
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: inactiveColor,
+                  // النص داخل الـ Pill (يظهر فقط للنشط)
+                  if (selected) ...[
+                    const SizedBox(width: 5),
+                    Flexible(
+                      child: Text(
+                        tab.label,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
+                          color: activeColor,
+                          letterSpacing: 0.1,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
                     ),
                   ],
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 3),
+
+            // ── النص الصغير أسفل الأيقونة (لغير النشط) ─────────────
+            SizedBox(
+              height: 12,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 200),
+                opacity: selected ? 0.0 : 1.0,
+                child: Text(
+                  tab.label,
+                  style: TextStyle(
+                    fontSize: 9.5,
+                    fontWeight: FontWeight.w500,
+                    color: inactiveColor,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                 ),
+              ),
+            ),
+          ],
         ),
       ),
     );

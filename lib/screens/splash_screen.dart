@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../core/painter/logo_painter.dart';
 import '../core/session/session_store.dart';
 import '../core/storage/local_store.dart';
 import '../core/theme/app_theme.dart';
@@ -56,7 +57,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF03045A) : Colors.white,
+      backgroundColor: isDark ? AppColors.backgroundDark : Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -68,11 +69,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                 scale: _scale.value,
                 child: Opacity(opacity: _fade.value.clamp(0.0, 1.0), child: child),
               ),
-              child: Image.asset(
-                'assets/icon/icon_original.png',
-                width: 160,
-                height: 160,
-                fit: BoxFit.contain,
+              child: LogoWidget(
+                size: 160,
+                darkBackground: isDark,
+                withShadow: !isDark,
               ),
             ),
 
