@@ -1,25 +1,20 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
-/// شعار شغّالتي — 4 أجنحة محدبة زجاجية
-/// مطابق للشعار الأصلي بدقة رياضية كاملة
+/// شعار شغّالتي — 4 وسادات مربعة محدبة للخارج
+/// الأضلاع الخارجية محدبة للخارج (بعيداً عن مركز الصورة)
+/// مطابق للشعار الأصلي: وسادات + فجوة X بيضاء
 class LogoPainter extends CustomPainter {
   final bool darkBackground;
   const LogoPainter({this.darkBackground = false});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final w = size.width;
-    final h = size.height;
+    final w  = size.width;
+    final h  = size.height;
     final cx = w / 2;
     final cy = h / 2;
 
-    // ── ثوابت الشكل (كنسبة من الحجم) ─────────────────────────────
-    final R   = w * 0.46;  // نصف القطر الخارجي (للركن)
-    final gap = w * 0.022; // نصف الفجوة البيضاء (الـ X)
-    final cvx = 0.72;      // عمق التحدّب للخارج (0=مستقيم, 1=دائرة)
-
-    // ── رسم الخلفية ───────────────────────────────────────────────
     if (darkBackground) {
       final bgPaint = Paint()
         ..shader = const LinearGradient(
@@ -30,143 +25,88 @@ class LogoPainter extends CustomPainter {
       canvas.drawRect(Rect.fromLTWH(0, 0, w, h), bgPaint);
     }
 
-    // ── تعريف 4 أجنحة ─────────────────────────────────────────────
-    // كل جناح: مربع صغير بجانب المركز + ركن محدب للخارج
-    // الزوايا: TL=أعلى يسار، TR=أعلى يمين، BR=أسفل يمين، BL=أسفل يسار
-    final a = math.sqrt(2) / 2; // cos(45°)
+    // gap = نصف عرض الفجوة (X البيضاء)
+    // ext = امتداد كل وسادة من المركز للحافة الخارجية
+    // cvx = شدة التحدب للخارج
+    final gap = w * 0.038;
+    final ext = w * 0.42;
+    final cvx = 0.62;
 
-    // نقاط الأركان الخارجية للشعار
-    final corners = [
-      Offset(cx - R * a, cy - R * a), // TL
-      Offset(cx + R * a, cy - R * a), // TR
-      Offset(cx + R * a, cy + R * a), // BR
-      Offset(cx - R * a, cy + R * a), // BL
+    final pads = [
+      // TL
+      [Offset(cx-gap,cy-gap), Offset(cx-gap,cy-ext), Offset(cx-ext,cy-ext), Offset(cx-ext,cy-gap)],
+      // TR
+      [Offset(cx+gap,cy-gap), Offset(cx+ext,cy-gap), Offset(cx+ext,cy-ext), Offset(cx+gap,cy-ext)],
+      // BR
+      [Offset(cx+gap,cy+gap), Offset(cx+gap,cy+ext), Offset(cx+ext,cy+ext), Offset(cx+ext,cy+gap)],
+      // BL
+      [Offset(cx-gap,cy+gap), Offset(cx-ext,cy+gap), Offset(cx-ext,cy+ext), Offset(cx-gap,cy+ext)],
     ];
 
-    // نقاط حافة الفجوة (حول المركز)
-    // كل جناح له 4 نقاط تُشكّل مربعه الداخلي
-    final wings = [
-      // TL wing: بين (cx-gap, cy-gap) و TL corner
-      [
-        Offset(cx - gap, cy - gap), // داخلي يمين-أسفل
-        Offset(cx - gap, cy - R * a * 1.28), // أعلى يسار المركز
-        Offset(cx - R * a * 1.28, cy - R * a * 1.28), // الركن الخارجي
-        Offset(cx - R * a * 1.28, cy - gap), // يسار المركز
-      ],
-      // TR wing
-      [
-        Offset(cx + gap, cy - gap),
-        Offset(cx + R * a * 1.28, cy - gap),
-        Offset(cx + R * a * 1.28, cy - R * a * 1.28),
-        Offset(cx + gap, cy - R * a * 1.28),
-      ],
-      // BR wing
-      [
-        Offset(cx + gap, cy + gap),
-        Offset(cx + gap, cy + R * a * 1.28),
-        Offset(cx + R * a * 1.28, cy + R * a * 1.28),
-        Offset(cx + R * a * 1.28, cy + gap),
-      ],
-      // BL wing
-      [
-        Offset(cx - gap, cy + gap),
-        Offset(cx - R * a * 1.28, cy + gap),
-        Offset(cx - R * a * 1.28, cy + R * a * 1.28),
-        Offset(cx - gap, cy + R * a * 1.28),
-      ],
+    final padColors = [
+      [const Color(0xFF5050E0), const Color(0xFF2020B5)],
+      [const Color(0xFF4040D0), const Color(0xFF1E1EA8)],
+      [const Color(0xFF2E2EC0), const Color(0xFF181898)],
+      [const Color(0xFF3838C8), const Color(0xFF1A1AA0)],
     ];
 
-    // مراكز الأجنحة (لحساب اتجاه التحدّب)
-    final wingCenters = [
-      Offset(cx - R * a * 0.5, cy - R * a * 0.5),
-      Offset(cx + R * a * 0.5, cy - R * a * 0.5),
-      Offset(cx + R * a * 0.5, cy + R * a * 0.5),
-      Offset(cx - R * a * 0.5, cy + R * a * 0.5),
-    ];
-
-    // ألوان كل جناح (gradient يعطي إحساس 3D)
-    final wingColors = [
-      [const Color(0xFF4848D8), const Color(0xFF1C1CA8)], // TL — أفتح (ضوء)
-      [const Color(0xFF3838C8), const Color(0xFF1A1A9E)], // TR
-      [const Color(0xFF2A2AB8), const Color(0xFF14148C)], // BR — أغمق (ظل)
-      [const Color(0xFF3232C0), const Color(0xFF181898)], // BL
-    ];
-
-    // ── رسم كل جناح ────────────────────────────────────────────────
     for (int i = 0; i < 4; i++) {
-      final pts = wings[i];
-      final wc  = wingCenters[i];
+      final pts = pads[i];
       final path = Path();
 
-      // حساب control points للتحدّب
-      // cp = منتصف الضلع + انزياح نحو مركز الجناح
-      Offset cp(Offset a, Offset b) {
-        final mid = Offset((a.dx + b.dx) / 2, (a.dy + b.dy) / 2);
-        return Offset(
-          mid.dx + (wc.dx - mid.dx) * cvx,
-          mid.dy + (wc.dy - mid.dy) * cvx,
-        );
+      // cp للخارج: منتصف الضلع + انزياح بعيداً عن cx,cy
+      Offset cpOut(Offset a, Offset b) {
+        final mx = (a.dx + b.dx) / 2;
+        final my = (a.dy + b.dy) / 2;
+        return Offset(mx + (mx - cx) * cvx, my + (my - cy) * cvx);
       }
 
-      // p1 → p2 (محدب)
-      final cp12 = cp(pts[0], pts[1]);
-      // p2 → p3 (محدب)
-      final cp23 = cp(pts[1], pts[2]);
-      // p3 → p4 (محدب)
-      final cp34 = cp(pts[2], pts[3]);
-      // p4 → p1 (محدب)
-      final cp41 = cp(pts[3], pts[0]);
-
       path.moveTo(pts[0].dx, pts[0].dy);
-      path.quadraticBezierTo(cp12.dx, cp12.dy, pts[1].dx, pts[1].dy);
-      path.quadraticBezierTo(cp23.dx, cp23.dy, pts[2].dx, pts[2].dy);
-      path.quadraticBezierTo(cp34.dx, cp34.dy, pts[3].dx, pts[3].dy);
-      path.quadraticBezierTo(cp41.dx, cp41.dy, pts[0].dx, pts[0].dy);
+      // ضلع 0→1 (أحد الأضلاع الداخلية — مستقيم)
+      path.lineTo(pts[1].dx, pts[1].dy);
+      // ضلع 1→2 (الحافة الخارجية الأولى — محدب للخارج)
+      final cp12 = cpOut(pts[1], pts[2]);
+      path.quadraticBezierTo(cp12.dx, cp12.dy, pts[2].dx, pts[2].dy);
+      // ضلع 2→3 (الحافة الخارجية الثانية — محدب للخارج)
+      final cp23 = cpOut(pts[2], pts[3]);
+      path.quadraticBezierTo(cp23.dx, cp23.dy, pts[3].dx, pts[3].dy);
+      // ضلع 3→0 (الضلع الداخلي الآخر — مستقيم)
+      path.lineTo(pts[0].dx, pts[0].dy);
       path.close();
 
-      // Gradient paint
       final bounds = path.getBounds();
       final gradPaint = Paint()
         ..shader = LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: wingColors[i],
+          colors: padColors[i],
         ).createShader(bounds);
-
       canvas.drawPath(path, gradPaint);
 
-      // حافة زجاجية
       final edgePaint = Paint()
-        ..color = const Color(0x55C8D8FF)
+        ..color = const Color(0x65C8DAFF)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = w * 0.006;
+        ..strokeWidth = w * 0.007
+        ..strokeJoin = StrokeJoin.round;
       canvas.drawPath(path, edgePaint);
     }
 
-    // ── لمعة زجاجية علوية ──────────────────────────────────────────
+    // لمعة زجاجية
     final hlPaint = Paint()
       ..shader = RadialGradient(
-        center: const Alignment(-0.1, -0.6),
-        radius: 0.5,
-        colors: [
-          Colors.white.withOpacity(0.22),
-          Colors.white.withOpacity(0.0),
-        ],
+        center: const Alignment(-0.2, -0.55),
+        radius: 0.55,
+        colors: [Colors.white.withOpacity(0.28), Colors.white.withOpacity(0.0)],
       ).createShader(Rect.fromLTWH(0, 0, w, h));
     canvas.drawRect(Rect.fromLTWH(0, 0, w, h), hlPaint);
 
-    // ── ظل خفيف تحت الشعار (على الخلفية البيضاء فقط) ─────────────
+    // ظل ناعم
     if (!darkBackground) {
       final shadowPaint = Paint()
-        ..color = const Color(0x18000080)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
-      final shadowR = R * 0.72;
+        ..color = const Color(0x1A000088)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 14);
       canvas.drawOval(
-        Rect.fromCenter(
-          center: Offset(cx + w * 0.015, cy + h * 0.03),
-          width: shadowR * 1.85,
-          height: shadowR * 0.4,
-        ),
+        Rect.fromCenter(center: Offset(cx, cy + ext * 0.85), width: ext * 1.6, height: ext * 0.28),
         shadowPaint,
       );
     }
@@ -176,45 +116,18 @@ class LogoPainter extends CustomPainter {
   bool shouldRepaint(LogoPainter old) => old.darkBackground != darkBackground;
 }
 
-/// Widget مشترك يستخدم LogoPainter
 class LogoWidget extends StatelessWidget {
   final double size;
   final bool darkBackground;
   final bool withShadow;
-
-  const LogoWidget({
-    super.key,
-    this.size = 80,
-    this.darkBackground = false,
-    this.withShadow = true,
-  });
+  const LogoWidget({super.key, this.size=80, this.darkBackground=false, this.withShadow=true});
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final useDarkBg = darkBackground || isDark;
-
-    Widget logo = CustomPaint(
+    return CustomPaint(
       size: Size(size, size),
-      painter: LogoPainter(darkBackground: useDarkBg),
+      painter: LogoPainter(darkBackground: darkBackground || isDark),
     );
-
-    if (withShadow && !useDarkBg) {
-      logo = Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(size * 0.22),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF2222CC).withOpacity(0.25),
-              blurRadius: size * 0.25,
-              offset: Offset(0, size * 0.08),
-            ),
-          ],
-        ),
-        child: logo,
-      );
-    }
-
-    return logo;
   }
 }
