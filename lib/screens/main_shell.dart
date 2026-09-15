@@ -697,6 +697,15 @@ class _DrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    // أيقونات مرئية في كلا الوضعين
+    final iconBg = isDark
+        ? Colors.white.withOpacity(0.10)      // أبيض شفاف في dark
+        : AppColors.primary.withOpacity(0.08); // الحالي في light
+    final iconClr = isDark
+        ? Colors.white.withOpacity(0.85)       // أبيض في dark
+        : AppColors.primary;                   // كحلي في light
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       child: Material(
@@ -713,10 +722,10 @@ class _DrawerItem extends StatelessWidget {
                   width: 34,
                   height: 34,
                   decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.08),
+                    color: iconBg,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Icon(icon, color: AppColors.primary, size: 18),
+                  child: Icon(icon, color: iconClr, size: 18),
                 ),
                 const SizedBox(width: 12),
                 Text(label,

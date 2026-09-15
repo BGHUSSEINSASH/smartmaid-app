@@ -128,6 +128,14 @@ class _WorkerProfileScreenState extends ConsumerState<WorkerProfileScreen> {
           SliverAppBar(
             expandedHeight: 280,
             pinned: true,
+            // العنوان يظهر عند الانكماش
+            title: Text(
+              widget.worker.name,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
             actions: [
               aiAppBarButton(context, initialMessage: 'أخبرني عن تقييمات ${widget.worker.name}'),
               Padding(

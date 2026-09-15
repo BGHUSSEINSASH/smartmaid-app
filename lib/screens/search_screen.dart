@@ -351,11 +351,31 @@ class _WorkerCard extends ConsumerWidget {
         decoration: BoxDecoration(
           color: isDark ? AppColors.surfaceDark : Colors.white,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: aiScore >= 0.8 ? AppColors.primary.withValues(alpha: .3) : AppColors.stroke),
-          boxShadow: [BoxShadow(
-            color: aiScore >= 0.8 ? AppColors.primary.withValues(alpha: .06) : Colors.black.withValues(alpha: .03),
-            blurRadius: 12, offset: const Offset(0, 4),
-          )],
+          border: Border.all(
+            color: isDark
+                ? (aiScore >= 0.8
+                    ? AppColors.accent.withOpacity(.35)
+                    : const Color(0xFF1A1A50))
+                : (aiScore >= 0.8
+                    ? AppColors.primary.withOpacity(.3)
+                    : AppColors.stroke),
+          ),
+          // Glow في dark mode
+          boxShadow: isDark
+              ? [BoxShadow(
+                  color: aiScore >= 0.8
+                      ? AppColors.accent.withOpacity(0.20)
+                      : AppColors.primary.withOpacity(0.12),
+                  blurRadius: 14,
+                  offset: const Offset(0, 3),
+                )]
+              : [BoxShadow(
+                  color: aiScore >= 0.8
+                      ? AppColors.primary.withOpacity(.06)
+                      : Colors.black.withOpacity(.03),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                )],
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(children: [

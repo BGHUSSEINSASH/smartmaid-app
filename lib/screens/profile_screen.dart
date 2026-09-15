@@ -360,7 +360,8 @@ class _StatDivider extends StatelessWidget {
     return Container(
       width: 1,
       height: 28,
-      color: Colors.white.withValues(alpha: 0.25),
+      // على الخلفية الـ gradient تبقى بيضاء
+      color: Colors.white.withOpacity(0.25),
     );
   }
 }
@@ -437,14 +438,20 @@ class _MenuCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? AppColors.surfaceDark : Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.stroke),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.04),
-            blurRadius: 12,
-            offset: const Offset(0, 3),
-          ),
-        ],
+        border: Border.all(
+          color: isDark ? const Color(0xFF1A1A50) : AppColors.stroke,
+        ),
+        boxShadow: isDark
+            ? [BoxShadow(
+                color: AppColors.primary.withOpacity(0.12),
+                blurRadius: 14,
+                offset: const Offset(0, 3),
+              )]
+            : [BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 12,
+                offset: const Offset(0, 3),
+              )],
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -456,7 +463,7 @@ class _MenuCard extends StatelessWidget {
                 height: 1,
                 indent: 60,
                 endIndent: 16,
-                color: AppColors.stroke,
+                color: isDark ? const Color(0xFF1A1A50) : AppColors.stroke,
               ),
           ],
         ],

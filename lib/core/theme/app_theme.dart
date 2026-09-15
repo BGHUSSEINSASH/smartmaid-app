@@ -230,13 +230,14 @@ class AppTheme {
           borderRadius: AppRadii.input,
           borderSide: BorderSide.none,
         ),
-        enabledBorder: const OutlineInputBorder(
+        // إصلاح: حدود بيضاء شفافة أوضح من البنفسجي
+        enabledBorder: OutlineInputBorder(
           borderRadius: AppRadii.input,
-          borderSide: BorderSide(color: Color(0x334F46E5)),
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.12)),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AppRadii.input,
-          borderSide: BorderSide(color: AppColors.primary, width: 1.3),
+          borderSide: BorderSide(color: AppColors.accent, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -260,6 +261,41 @@ class AppTheme {
         ),
         bodyMedium: TextStyle(color: Colors.white, height: 1.35),
       ),
+      // Drawer
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: Color(0xFF08082A),
+      ),
+      // Divider
+      dividerTheme: DividerThemeData(
+        color: Colors.white.withOpacity(0.10),
+        thickness: 0.8,
+      ),
+      // SnackBar
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: const Color(0xFF1C1C4E),
+        contentTextStyle: const TextStyle(color: Colors.white),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: Colors.white.withOpacity(0.10)),
+        ),
+        behavior: SnackBarBehavior.floating,
+      ),
+      // ListTile
+      listTileTheme: ListTileThemeData(
+        tileColor: Colors.transparent,
+        selectedTileColor: AppColors.primary.withOpacity(0.15),
+        iconColor: Colors.white70,
+        textColor: Colors.white,
+      ),
+      // Switch
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((s) =>
+            s.contains(WidgetState.selected) ? Colors.white : Colors.white54),
+        trackColor: WidgetStateProperty.resolveWith((s) =>
+            s.contains(WidgetState.selected)
+                ? AppColors.accent.withOpacity(0.7)
+                : Colors.white.withOpacity(0.15)),
+      ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surfaceDark,
         indicatorColor: AppColors.primary.withOpacity(0.25),
@@ -268,7 +304,6 @@ class AppTheme {
           final selected = states.contains(WidgetState.selected);
           return TextStyle(
             fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
-            // إصلاح Dark Mode: أبيض للنشط بدلاً من primary (#03045A غير مقروء)
             color: selected ? Colors.white : Colors.white60,
           );
         }),

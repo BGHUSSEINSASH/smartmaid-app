@@ -151,20 +151,7 @@ class SettingsScreen extends ConsumerWidget {
                         TextStyle(fontWeight: FontWeight.w700, fontSize: 14.5)),
                 subtitle: const Text('كيف نحمي بياناتك',
                     style: TextStyle(fontSize: 12)),
-                onTap: () => showDialog<void>(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: const Text('الخصوصية والأمان'),
-                    content: const Text(
-                        'نحفظ بياناتك محلياً على جهازك في هذا الإصدار التجريبي، ولا نشارك أي معلومات مع أطراف ثالثة. في النسخة السحابية تُشفَّر البيانات وتُخزن بأمان.',
-                        style: TextStyle(height: 1.6)),
-                    actions: [
-                      TextButton(
-                          onPressed: () => Navigator.pop(ctx),
-                          child: const Text('فهمت'))
-                    ],
-                  ),
-                ),
+                onTap: () => context.push('/privacy-policy'),
               ),
             ]),
             const SizedBox(height: 20),

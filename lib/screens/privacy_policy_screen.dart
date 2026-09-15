@@ -156,7 +156,17 @@ class _ArticleTileState extends State<_ArticleTile> {
       decoration: BoxDecoration(
         color: isDark ? AppColors.surfaceDark : Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.stroke),
+        border: Border.all(
+          color: isDark ? const Color(0xFF1E1E50) : AppColors.stroke,
+        ),
+        // Glow خفيف في dark mode
+        boxShadow: isDark
+            ? [BoxShadow(
+                color: AppColors.primary.withOpacity(0.12),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              )]
+            : null,
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
@@ -167,19 +177,38 @@ class _ArticleTileState extends State<_ArticleTile> {
             Row(children: [
               Container(
                 width: 26, height: 26,
-                decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(8)),
-                child: Center(child: Text(widget.number, style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 11))),
+                decoration: BoxDecoration(
+                  // إصلاح: لون مناسب في dark mode
+                  color: isDark
+                      ? AppColors.primary.withOpacity(0.22)
+                      : AppColors.primaryLight,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(child: Text(widget.number, style: TextStyle(
+                  color: isDark ? Colors.white : AppColors.primary,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 11,
+                ))),
               ),
               const SizedBox(width: 10),
               Expanded(child: Text('المادة ${widget.number}: ${widget.title}',
-                  style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13))),
-              Icon(_exp ? Icons.expand_less_rounded : Icons.expand_more_rounded, color: AppColors.muted, size: 18),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                    color: isDark ? Colors.white : null,
+                  ))),
+              Icon(_exp ? Icons.expand_less_rounded : Icons.expand_more_rounded,
+                  color: isDark ? Colors.white54 : AppColors.muted, size: 18),
             ]),
             if (_exp) ...[
               const SizedBox(height: 8),
-              const Divider(height: 1),
+              Divider(height: 1, color: isDark ? const Color(0xFF1E1E50) : null),
               const SizedBox(height: 8),
-              Text(widget.body, style: const TextStyle(fontSize: 12.5, height: 1.75, color: AppColors.textSecondary)),
+              Text(widget.body, style: TextStyle(
+                fontSize: 12.5,
+                height: 1.75,
+                color: isDark ? Colors.white70 : AppColors.textSecondary,
+              )),
             ],
           ]),
         ),
