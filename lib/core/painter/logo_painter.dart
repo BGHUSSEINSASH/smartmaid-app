@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 /// شعار شغّالتي — 4 وسادات مربعة محدبة للخارج
@@ -96,7 +95,7 @@ class LogoPainter extends CustomPainter {
       ..shader = RadialGradient(
         center: const Alignment(-0.2, -0.55),
         radius: 0.55,
-        colors: [Colors.white.withOpacity(0.28), Colors.white.withOpacity(0.0)],
+        colors: [Colors.white.withValues(alpha: 0.28), Colors.white.withValues(alpha: 0.0)],
       ).createShader(Rect.fromLTWH(0, 0, w, h));
     canvas.drawRect(Rect.fromLTWH(0, 0, w, h), hlPaint);
 

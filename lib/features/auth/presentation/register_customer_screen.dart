@@ -223,6 +223,7 @@ class _DropField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
+      // ignore: deprecated_member_use
       value: value,
       decoration: InputDecoration(labelText: label),
       items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),

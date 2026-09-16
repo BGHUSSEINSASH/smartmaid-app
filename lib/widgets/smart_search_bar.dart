@@ -113,10 +113,12 @@ class _SmartSearchBarState extends ConsumerState<SmartSearchBar>
       onSoundLevelChange: (level) {
         if (mounted) setState(() => _soundLevel = level.clamp(0, 10));
       },
-      localeId: 'ar_SA',
-      listenFor: const Duration(seconds: 30),
-      pauseFor: const Duration(seconds: 2),
-      partialResults: true,
+      listenOptions: stt.SpeechListenOptions(
+        localeId: 'ar_SA',
+        listenFor: const Duration(seconds: 30),
+        pauseFor: const Duration(seconds: 2),
+        partialResults: true,
+      ),
     );
   }
 
