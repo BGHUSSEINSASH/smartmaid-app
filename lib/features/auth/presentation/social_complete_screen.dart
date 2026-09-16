@@ -121,7 +121,8 @@ class _SocialCompleteState extends ConsumerState<SocialCompleteScreen> {
 
   List<Widget> _customerFields() => [
     DropdownButtonFormField<String>(
-      initialValue: _nationality,
+      // ignore: deprecated_member_use
+      value: _nationality,
       decoration: const InputDecoration(labelText: 'الجنسية'),
       items: const ['السعودية', 'الإمارات', 'الكويت', 'مصر', 'أخرى']
           .map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),

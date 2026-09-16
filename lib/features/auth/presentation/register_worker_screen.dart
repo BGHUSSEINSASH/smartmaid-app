@@ -149,7 +149,8 @@ class _RegisterWorkerState extends ConsumerState<RegisterWorkerScreen> {
           keyboardType: TextInputType.emailAddress),
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
-        initialValue: _nationality,
+        // ignore: deprecated_member_use
+        value: _nationality,
         decoration: const InputDecoration(labelText: 'الجنسية'),
         items: _nationalities.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
         onChanged: (v) => setState(() => _nationality = v!),
