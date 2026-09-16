@@ -20,7 +20,7 @@ class _SocialCompleteState extends ConsumerState<SocialCompleteScreen> {
   String _nationality = 'السعودية';
   // worker extras
   final _skillsAll = ['تنظيف عام', 'طبخ', 'رعاية أطفال', 'كبار السن', 'غسيل وكواء'];
-  List<String> _selectedSkills = [];
+  final List<String> _selectedSkills = [];
   // company extras
   final _companyCtrl = TextEditingController();
   final _regCtrl = TextEditingController();
@@ -121,7 +121,7 @@ class _SocialCompleteState extends ConsumerState<SocialCompleteScreen> {
 
   List<Widget> _customerFields() => [
     DropdownButtonFormField<String>(
-      value: _nationality,
+      initialValue: _nationality,
       decoration: const InputDecoration(labelText: 'الجنسية'),
       items: const ['السعودية', 'الإمارات', 'الكويت', 'مصر', 'أخرى']
           .map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),

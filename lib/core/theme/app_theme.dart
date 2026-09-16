@@ -233,7 +233,7 @@ class AppTheme {
         // إصلاح: حدود بيضاء شفافة أوضح من البنفسجي
         enabledBorder: OutlineInputBorder(
           borderRadius: AppRadii.input,
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.12)),
+          borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.12)),
         ),
         focusedBorder: const OutlineInputBorder(
           borderRadius: AppRadii.input,
@@ -267,7 +267,7 @@ class AppTheme {
       ),
       // Divider
       dividerTheme: DividerThemeData(
-        color: Colors.white.withOpacity(0.10),
+        color: Colors.white.withValues(alpha: 0.10),
         thickness: 0.8,
       ),
       // SnackBar
@@ -276,14 +276,14 @@ class AppTheme {
         contentTextStyle: const TextStyle(color: Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: Colors.white.withOpacity(0.10)),
+          side: BorderSide(color: Colors.white.withValues(alpha: 0.10)),
         ),
         behavior: SnackBarBehavior.floating,
       ),
       // ListTile
       listTileTheme: ListTileThemeData(
         tileColor: Colors.transparent,
-        selectedTileColor: AppColors.primary.withOpacity(0.15),
+        selectedTileColor: AppColors.primary.withValues(alpha: 0.15),
         iconColor: Colors.white70,
         textColor: Colors.white,
       ),
@@ -293,12 +293,12 @@ class AppTheme {
             s.contains(WidgetState.selected) ? Colors.white : Colors.white54),
         trackColor: WidgetStateProperty.resolveWith((s) =>
             s.contains(WidgetState.selected)
-                ? AppColors.accent.withOpacity(0.7)
-                : Colors.white.withOpacity(0.15)),
+                ? AppColors.accent.withValues(alpha: 0.7)
+                : Colors.white.withValues(alpha: 0.15)),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.surfaceDark,
-        indicatorColor: AppColors.primary.withOpacity(0.25),
+        indicatorColor: AppColors.primary.withValues(alpha: 0.25),
         shadowColor: Colors.transparent,
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           final selected = states.contains(WidgetState.selected);

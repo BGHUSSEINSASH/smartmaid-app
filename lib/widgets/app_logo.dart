@@ -47,7 +47,7 @@ class AppLogo extends StatelessWidget {
                     fontSize: size * 0.21,
                     fontWeight: FontWeight.w500,
                     color: isDark
-                        ? Colors.white.withOpacity(0.6)
+                        ? Colors.white.withValues(alpha: 0.6)
                         : AppColors.muted,
                   ),
                 ),
