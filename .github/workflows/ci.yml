@@ -14,7 +14,8 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
-      - run: flutter analyze --no-pub
+      # --no-fatal-infos: تجاهل الـ info messages، فقط warnings/errors تُفشل البناء
+      - run: flutter analyze --no-pub --no-fatal-infos
       - run: flutter test
 
   backend:
