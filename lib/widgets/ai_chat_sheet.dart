@@ -88,8 +88,12 @@ class _AiChatSheetState extends ConsumerState<AiChatSheet> {
         }
       },
       onSoundLevelChange: (l) { if (mounted) setState(() => _soundLevel = l.clamp(0, 10)); },
-      localeId: 'ar_SA', listenFor: const Duration(seconds: 30),
-      pauseFor: const Duration(seconds: 2), partialResults: true,
+      listenOptions: stt.SpeechListenOptions(
+        localeId: 'ar_SA',
+        listenFor: const Duration(seconds: 30),
+        pauseFor: const Duration(seconds: 2),
+        partialResults: true,
+      ),
     );
   }
 
@@ -229,7 +233,7 @@ class _AiChatSheetState extends ConsumerState<AiChatSheet> {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: _quickReplies.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              separatorBuilder: (_, _) => const SizedBox(width: 8),
               itemBuilder: (_, i) => GestureDetector(
                 onTap: () => _send(_quickReplies[i]),
                 child: Container(
@@ -400,7 +404,7 @@ class _TypingState extends State<_TypingIndicator> with SingleTickerProviderStat
       decoration: BoxDecoration(color: AppColors.bg, borderRadius: BorderRadius.circular(18).copyWith(bottomLeft: const Radius.circular(4))),
       child: Row(mainAxisSize: MainAxisSize.min, children: List.generate(3, (i) => AnimatedBuilder(
         animation: _c,
-        builder: (_, __) {
+        builder: (_, _) {
           final p = ((_c.value * 3) - i).clamp(0.0, 1.0);
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 2),

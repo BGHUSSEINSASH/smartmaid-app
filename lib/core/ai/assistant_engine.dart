@@ -162,8 +162,8 @@ int _levenshtein(String a, String b) {
   if (b.isEmpty) return a.length;
   final la = a.length, lb = b.length;
   final dp = List.generate(la + 1, (i) => List.filled(lb + 1, 0));
-  for (var i = 0; i <= la; i++) dp[i][0] = i;
-  for (var j = 0; j <= lb; j++) dp[0][j] = j;
+  for (var i = 0; i <= la; i++) { dp[i][0] = i; }
+  for (var j = 0; j <= lb; j++) { dp[0][j] = j; }
   for (var i = 1; i <= la; i++) {
     for (var j = 1; j <= lb; j++) {
       dp[i][j] = a[i - 1] == b[j - 1]
@@ -190,7 +190,7 @@ bool _fuzzyContains(String text, String keyword) {
     if (word.length >= 3 && _levenshtein(word, k) <= maxDist) return true;
     // مطابقة جزئية: keyword يبدأ بـ word أو العكس
     if (word.length >= 3 && k.length >= 3 &&
-        (k.startsWith(word) || word.startsWith(k))) return true;
+        (k.startsWith(word) || word.startsWith(k))) { return true; }
   }
   return false;
 }

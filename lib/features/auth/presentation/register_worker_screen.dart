@@ -31,7 +31,7 @@ class _RegisterWorkerState extends ConsumerState<RegisterWorkerScreen> {
 
   // خطوة 2 — بيانات العمل
   final _skillsAll = ['تنظيف عام', 'طبخ', 'رعاية أطفال', 'رعاية كبار السن', 'غسيل وكواء', 'تنظيف عميق'];
-  List<String> _selectedSkills = [];
+  final List<String> _selectedSkills = [];
   int _exp = 1;
   final _bioCtrl = TextEditingController();
   double _hourly = 30;
@@ -149,6 +149,7 @@ class _RegisterWorkerState extends ConsumerState<RegisterWorkerScreen> {
           keyboardType: TextInputType.emailAddress),
       const SizedBox(height: 12),
       DropdownButtonFormField<String>(
+        // ignore: deprecated_member_use
         value: _nationality,
         decoration: const InputDecoration(labelText: 'الجنسية'),
         items: _nationalities.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),

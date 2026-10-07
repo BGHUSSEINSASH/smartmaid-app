@@ -34,8 +34,8 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   @override
   void dispose() {
     _timer?.cancel();
-    for (final c in _controllers) c.dispose();
-    for (final f in _focusNodes) f.dispose();
+    for (final c in _controllers) { c.dispose(); }
+    for (final f in _focusNodes) { f.dispose(); }
     super.dispose();
   }
 
@@ -85,7 +85,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
     } else {
       HapticFeedback.heavyImpact();
       // رج الخانات
-      for (final c in _controllers) c.clear();
+      for (final c in _controllers) { c.clear(); }
       _focusNodes[0].requestFocus();
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('رمز التحقق غير صحيح، حاول مجدداً'),
