@@ -17,7 +17,6 @@ import 'company_bookings_screen.dart';
 import 'company_services_screen.dart';
 import 'company_settings_screen.dart';
 import 'company_workers_screen.dart';
-import 'company_billing_screen.dart';
 
 class CompanyDashboardScreen extends ConsumerStatefulWidget {
   const CompanyDashboardScreen({super.key});
@@ -108,7 +107,6 @@ class _CompanyDashboardScreenState extends ConsumerState<CompanyDashboardScreen>
     final sub = ref.watch(subscriptionProvider);
     final workers = ref.watch(companyWorkersProvider);
     final bookings = ref.watch(myBookingsProvider);
-    final wallet = ref.watch(walletProvider);
     final currency = ref.watch(currencyProvider);
     final flags = ref.watch(platformFlagsProvider);
     final pendingCount = bookings.where((b) => b.status == BookingStatus.pending).length;
@@ -119,7 +117,7 @@ class _CompanyDashboardScreenState extends ConsumerState<CompanyDashboardScreen>
         .fold<double>(0, (s, b) => s + b.total);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: context.pageBg,
         body: CustomScrollView(
@@ -450,9 +448,6 @@ class _CompanyDashboardScreenState extends ConsumerState<CompanyDashboardScreen>
   }
 }
 
-class company_dashboard_screen extends CompanyDashboardScreen {
-  const company_dashboard_screen({super.key});
-}
 
 class _CompanyBannerData {
   final String title;
@@ -761,4 +756,6 @@ class _UpdateTile extends StatelessWidget {
     );
   }
 }
+
+
 

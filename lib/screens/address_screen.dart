@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import '../core/theme/app_theme.dart';
+import '../providers/settings_provider.dart';
 import '../providers/address_provider.dart';
 
 class AddressScreen extends ConsumerStatefulWidget {
@@ -107,8 +108,10 @@ class _AddressScreenState extends ConsumerState<AddressScreen> {
 
     // 3. Reverse geocoding عبر Nominatim
     try {
+      // لغة العنوان تعكس لغة التطبيق
+      final geoLang = ref.read(settingsProvider).language == 'en' ? 'en' : 'ar';
       final uri = Uri.parse(
-          'https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.latitude}&lon=${pos.longitude}&accept-language=ar');
+          'https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.latitude}&lon=${pos.longitude}&accept-language=$geoLang');
       final res = await http
           .get(uri, headers: {'User-Agent': 'SmartMaidApp/1.0'})
           .timeout(const Duration(seconds: 8));
@@ -465,3 +468,4 @@ class _AddressScreenState extends ConsumerState<AddressScreen> {
     );
   }
 }
+

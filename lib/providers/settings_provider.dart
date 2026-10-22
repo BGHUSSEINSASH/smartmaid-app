@@ -1,3 +1,4 @@
+import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/session/session_store.dart';
 
@@ -48,10 +49,12 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
 
   Future<void> _restore() async {
     final dark = await SettingsPersistence.loadBool(SettingsPersistence.kDark);
-    final lang = await SettingsPersistence.loadString(
+    // اللغة: نحفظها إن اختارها المستخدم، وإلا نتبع لغة النظام
+    final savedLang = await SettingsPersistence.loadString(
       SettingsPersistence.kLang,
-      fallback: 'ar',
+      fallback: '',
     );
+    final lang = savedLang.isNotEmpty ? savedLang : _systemLocale();
     final notif = await SettingsPersistence.loadBool(
       SettingsPersistence.kNotif,
       fallback: true,
@@ -71,6 +74,12 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
       highContrast: highContrast,
       reduceMotion: reduceMotion,
     );
+  }
+
+  /// لغة النظام — 'en' أو 'ar' (افتراضي عربي)
+  String _systemLocale() {
+    final code = PlatformDispatcher.instance.locale.languageCode;
+    return code == 'en' ? 'en' : 'ar';
   }
 
   void toggleDarkMode() {

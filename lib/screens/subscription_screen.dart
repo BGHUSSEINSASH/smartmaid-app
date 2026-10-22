@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/theme/app_theme.dart';
+import '../l10n/strings/s.dart';
 import '../providers/subscription_provider.dart';
 import '../providers/wallet_provider.dart';
 import '../providers/platform_control_provider.dart';
@@ -78,7 +79,7 @@ class SubscriptionScreen extends ConsumerWidget {
                 ),
                 onPressed: () => _handleCancel(context, ref),
                 icon: const Icon(Icons.cancel_rounded, size: 18),
-                label: const Text('إلغاء الاشتراك'),
+                label: const T('إلغاء الاشتراك'),
               ),
             ),
             const SizedBox(height: 12),
@@ -211,7 +212,7 @@ class SubscriptionScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('إلغاء الاشتراك'),
+        title: const T('إلغاء الاشتراك'),
         content: const Text(
             'هل أنت متأكد؟ ستفقد جميع مزايا الاشتراك فور الإلغاء ولن يتم استرداد أي مبلغ.'),
         actions: [
@@ -222,7 +223,7 @@ class SubscriptionScreen extends ConsumerWidget {
               Navigator.pop(context);
               ref.read(subscriptionProvider.notifier).cancel();
             },
-            child: const Text('إلغاء الاشتراك'),
+            child: const T('إلغاء الاشتراك'),
           ),
         ],
       ),
@@ -539,3 +540,4 @@ class _PlanCard extends StatelessWidget {
     );
   }
 }
+

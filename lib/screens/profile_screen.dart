@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/responsive/breakpoints.dart';
+import '../l10n/strings/s.dart';
 import '../core/theme/app_theme.dart';
 import '../widgets/ai_app_bar_button.dart';
 import '../core/theme/adaptive.dart';
@@ -205,13 +206,13 @@ class ProfileScreen extends ConsumerWidget {
           const SizedBox(height: 20),
 
           // ── قسم: المالية والمكافآت ───────────────────────────────────
-          _SectionLabel('المالية والمكافآت'),
+          _SectionLabel(S.t('المالية والمكافآت')),
           const SizedBox(height: 8),
           _MenuCard(items: [
             _MenuItem(
               icon: Icons.account_balance_wallet_rounded,
               iconColor: const Color(0xFF0353A4),
-              title: 'محفظة SmartPay',
+              title: S.t('محفظة SmartPay'),
               subtitle: 'الرصيد، الشحن، والمعاملات',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const WalletScreen())),
@@ -219,7 +220,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.emoji_events_rounded,
               iconColor: const Color(0xFFD97706),
-              title: 'نقاط المكافآت',
+              title: S.t('نقاط المكافآت'),
               subtitle: '$points نقطة — استبدلها بخصومات',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const LoyaltyScreen())),
@@ -227,7 +228,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.card_giftcard_rounded,
               iconColor: const Color(0xFF16A34A),
-              title: 'العروض والكوبونات',
+              title: S.t('العروض والكوبونات'),
               subtitle: 'خصومات حصرية لك',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const OffersScreen())),
@@ -239,7 +240,7 @@ class ProfileScreen extends ConsumerWidget {
                       ? const Color(0xFF7C3AED)
                       : const Color(0xFFD97706))
                   : AppColors.muted,
-              title: 'اشتراك SmartGold',
+              title: S.t('اشتراك SmartGold'),
               subtitle: sub.isActive
                   ? '${sub.tier.arabicLabel} — ينتهي ${sub.expiresAt!.day}/${sub.expiresAt!.month}'
                   : 'اشترك لخصومات حصرية',
@@ -268,13 +269,13 @@ class ProfileScreen extends ConsumerWidget {
           const SizedBox(height: 16),
 
           // ── قسم: حسابي وتفضيلاتي ────────────────────────────────────
-          _SectionLabel('حسابي وتفضيلاتي'),
+          _SectionLabel(S.t('حسابي وتفضيلاتي')),
           const SizedBox(height: 8),
           _MenuCard(items: [
             _MenuItem(
               icon: Icons.edit_rounded,
               iconColor: AppColors.primary,
-              title: 'تعديل الملف الشخصي',
+              title: S.t('تعديل الملف الشخصي'),
               subtitle: 'الاسم، الهاتف، الصورة',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const EditProfileScreen())),
@@ -282,7 +283,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.favorite_rounded,
               iconColor: const Color(0xFFE11D48),
-              title: 'المفضلة',
+              title: S.t('المفضلة'),
               subtitle: '$favCount عاملة محفوظة',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const FavoritesScreen())),
@@ -290,7 +291,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.location_on_rounded,
               iconColor: const Color(0xFF0E7490),
-              title: 'عناويني',
+              title: S.t('عناويني'),
               subtitle: '$addresses عناوين محفوظة',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const AddressScreen())),
@@ -298,7 +299,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.notifications_rounded,
               iconColor: const Color(0xFFDB2777),
-              title: 'الإشعارات',
+              title: S.t('الإشعارات'),
               subtitle: 'آخر التحديثات والعروض',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const NotificationsScreen())),
@@ -306,7 +307,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.people_alt_rounded,
               iconColor: const Color(0xFF7C3AED),
-              title: 'ادعُ أصدقاءك',
+              title: S.t('ادعُ أصدقاءك'),
               subtitle: '+100 نقطة لكل صديق ينضم',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const ReferralScreen())),
@@ -316,13 +317,13 @@ class ProfileScreen extends ConsumerWidget {
           const SizedBox(height: 16),
 
           // ── قسم: الدعم والإعدادات ────────────────────────────────────
-          _SectionLabel('الدعم والإعدادات'),
+          _SectionLabel(S.t('الدعم والإعدادات')),
           const SizedBox(height: 8),
           _MenuCard(items: [
             _MenuItem(
               icon: Icons.help_outline_rounded,
               iconColor: const Color(0xFF0353A4),
-              title: 'الأسئلة الشائعة',
+              title: S.t('الأسئلة الشائعة'),
               subtitle: 'إجابات سريعة عن أكثر ما يُسأل',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const FaqScreen())),
@@ -330,7 +331,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.settings_outlined,
               iconColor: AppColors.muted,
-              title: 'الإعدادات',
+              title: S.t('الإعدادات'),
               subtitle: 'اللغة، الثيم، العملة، الإشعارات',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const SettingsScreen())),
@@ -338,7 +339,7 @@ class ProfileScreen extends ConsumerWidget {
             _MenuItem(
               icon: Icons.cleaning_services_rounded,
               iconColor: const Color(0xFF16A34A),
-              title: 'دليل الخدمات',
+              title: S.t('دليل الخدمات'),
               subtitle: 'استعرض 110 خدمة مرتبة حسب الفئات',
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const CatalogScreen())),
@@ -551,6 +552,7 @@ class _MenuItem extends StatelessWidget {
     );
   }
 }
+
 
 
 

@@ -10,6 +10,7 @@ import 'providers/auth_provider.dart';
 import 'providers/platform_control_provider.dart';
 import 'providers/security_provider.dart';
 import 'providers/settings_provider.dart';
+import 'l10n/strings/s.dart';
 
 /// يستمع لتغييرات stream ويُخطر GoRouter بإعادة تقييم redirect.
 class _RouterRefresh extends ChangeNotifier {
@@ -54,8 +55,11 @@ class _SmartMaidAppState extends ConsumerState<SmartMaidApp> {
   Widget build(BuildContext context) {
     final settings = ref.watch(settingsProvider);
 
+    // تفعيل نظام الترجمة حسب اللغة المختارة
+    applyLocale(settings.language);
+
     return MaterialApp.router(
-      title: 'شغّالتي',
+      title: settings.language == 'ar' ? 'شغّالتي' : 'Shaghalti',
       debugShowCheckedModeBanner: false,
       routerConfig: routerConfig,
       theme: AppTheme.lightTheme,

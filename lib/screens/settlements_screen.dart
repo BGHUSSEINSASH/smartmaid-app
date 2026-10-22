@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../core/theme/app_theme.dart';
+import '../providers/settings_provider.dart';
 import '../core/theme/adaptive.dart';
 import '../data/repository.dart';
 import '../providers/trust_provider.dart';
@@ -19,7 +20,9 @@ class _SettlementsScreenState extends ConsumerState<SettlementsScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(settlementsProvider);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final fmt = NumberFormat.currency(locale: 'en', symbol: '\$', decimalDigits: 0);
+    // تنسيق الأرقام حسب لغة التطبيق
+    final localeCode = ref.read(settingsProvider).language == 'en' ? 'en_US' : 'ar';
+    final fmt = NumberFormat.currency(locale: localeCode, symbol: '\$', decimalDigits: 0);
 
     return Scaffold(
       backgroundColor:
@@ -218,3 +221,4 @@ class _SettlementTile extends StatelessWidget {
     );
   }
 }
+

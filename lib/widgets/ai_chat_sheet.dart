@@ -6,6 +6,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import '../core/ai/assistant_engine.dart';
 import '../core/api/api_client.dart';
 import '../core/theme/app_theme.dart';
+import '../providers/settings_provider.dart';
 
 class AiChatSheet extends ConsumerStatefulWidget {
   final String? initialMessage;
@@ -88,9 +89,15 @@ class _AiChatSheetState extends ConsumerState<AiChatSheet> {
         }
       },
       onSoundLevelChange: (l) { if (mounted) setState(() => _soundLevel = l.clamp(0, 10)); },
-      localeId: 'ar_SA', listenFor: const Duration(seconds: 30),
+      localeId: _speechLocale, listenFor: const Duration(seconds: 30),
       pauseFor: const Duration(seconds: 2), partialResults: true,
     );
+  }
+
+  /// لغة التعرّف الصوتي تتبع لغة التطبيق الحالية
+  String get _speechLocale {
+    final lang = ref.read(settingsProvider).language;
+    return lang == 'en' ? 'en_US' : 'ar_SA';
   }
 
   void _stopListening() {

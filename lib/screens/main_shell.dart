@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/responsive/breakpoints.dart';
+import '../l10n/strings/s.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/models.dart';
@@ -186,48 +187,48 @@ class _MainShellState extends ConsumerState<MainShell> {
     switch (role) {
       case AppRole.customer:
         return [
-          _Tab(t.tabHome, Icons.home_outlined, Icons.home_rounded, const HomeScreen()),
+          _Tab(S.t(t.tabHome), Icons.home_outlined, Icons.home_rounded, const HomeScreen()),
           if (flags.customerSearchTabVisible)
-            _Tab(t.tabServices, Icons.search_rounded, Icons.manage_search_rounded, const SearchScreen()),
+            _Tab(S.t(t.tabServices), Icons.search_rounded, Icons.manage_search_rounded, const SearchScreen()),
           if (flags.customerBookingsTabVisible)
-            _Tab(t.tabBookings, Icons.book_online_outlined, Icons.book_online_rounded, const MyBookingsScreen()),
-          _Tab(t.tabChat, Icons.chat_bubble_outline_rounded, Icons.chat_bubble_rounded, const ChatListScreen()),
-          _Tab(t.tabProfile, Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
+            _Tab(S.t(t.tabBookings), Icons.book_online_outlined, Icons.book_online_rounded, const MyBookingsScreen()),
+          _Tab(S.t(t.tabChat), Icons.chat_bubble_outline_rounded, Icons.chat_bubble_rounded, const ChatListScreen()),
+          _Tab(S.t(t.tabProfile), Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
         ];
       case AppRole.worker:
         if (!flags.workerSectionVisible) {
           // إصلاح M11: استخدام مفاتيح الترجمة بدل النصوص المكررة
           return [
-            _Tab(t.tabHome, Icons.home_outlined, Icons.home_rounded, const WorkerSectionClosedScreen()),
-            _Tab(t.tabProfile, Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
+            _Tab(S.t(t.tabHome), Icons.home_outlined, Icons.home_rounded, const WorkerSectionClosedScreen()),
+            _Tab(S.t(t.tabProfile), Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
           ];
         }
         return [
-          _Tab(t.tabDashboard, Icons.dashboard_outlined, Icons.dashboard_rounded, const WorkerDashboardScreen()),
+          _Tab(S.t(t.tabDashboard), Icons.dashboard_outlined, Icons.dashboard_rounded, const WorkerDashboardScreen()),
           if (flags.workerScheduleTabVisible)
-            _Tab(t.tabSchedule, Icons.calendar_month_outlined, Icons.calendar_month_rounded, const WorkerScheduleScreen()),
+            _Tab(S.t(t.tabSchedule), Icons.calendar_month_outlined, Icons.calendar_month_rounded, const WorkerScheduleScreen()),
           if (flags.workerRequestsTabVisible)
-            _Tab(t.tabRequests, Icons.mark_email_unread_outlined, Icons.mark_email_read_rounded, const WorkerRequestsScreen()),
-          _Tab(t.tabChat, Icons.chat_bubble_outline_rounded, Icons.chat_bubble_rounded, const ChatListScreen()),
-          _Tab(t.tabProfile, Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
+            _Tab(S.t(t.tabRequests), Icons.mark_email_unread_outlined, Icons.mark_email_read_rounded, const WorkerRequestsScreen()),
+          _Tab(S.t(t.tabChat), Icons.chat_bubble_outline_rounded, Icons.chat_bubble_rounded, const ChatListScreen()),
+          _Tab(S.t(t.tabProfile), Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
         ];
       case AppRole.company:
         return [
-          _Tab(t.tabDashboard, Icons.dashboard_outlined, Icons.dashboard_rounded, const CompanyDashboardScreen()),
+          _Tab(S.t(t.tabDashboard), Icons.dashboard_outlined, Icons.dashboard_rounded, const CompanyDashboardScreen()),
           if (flags.companyBookingsTabVisible)
-            _Tab(t.tabIncoming, Icons.inbox_outlined, Icons.inbox_rounded, const CompanyBookingsScreen()),
+            _Tab(S.t(t.tabIncoming), Icons.inbox_outlined, Icons.inbox_rounded, const CompanyBookingsScreen()),
           if (flags.companyWorkersTabVisible)
-            _Tab(t.tabWorkers, Icons.groups_outlined, Icons.groups_rounded, const CompanyWorkersScreen()),
-          _Tab(t.tabChat, Icons.chat_bubble_outline_rounded, Icons.chat_bubble_rounded, const ChatListScreen()),
-          _Tab(t.tabProfile, Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
+            _Tab(S.t(t.tabWorkers), Icons.groups_outlined, Icons.groups_rounded, const CompanyWorkersScreen()),
+          _Tab(S.t(t.tabChat), Icons.chat_bubble_outline_rounded, Icons.chat_bubble_rounded, const ChatListScreen()),
+          _Tab(S.t(t.tabProfile), Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
         ];
       case AppRole.admin:
         return [
-          _Tab(t.tabDashboard, Icons.admin_panel_settings_outlined, Icons.admin_panel_settings_rounded, const AdminScreen()),
-          _Tab(t.tabCompanies, Icons.domain_outlined, Icons.domain_rounded, const AdminCompaniesScreen()),
-          _Tab(t.tabFinance, Icons.account_balance_wallet_outlined, Icons.account_balance_wallet_rounded, const AdminFinanceScreen()),
-          _Tab(t.tabDisputes, Icons.gavel_outlined, Icons.gavel_rounded, const AdminDisputesScreen()),
-          _Tab(t.tabProfile, Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
+          _Tab(S.t(t.tabDashboard), Icons.admin_panel_settings_outlined, Icons.admin_panel_settings_rounded, const AdminScreen()),
+          _Tab(S.t(t.tabCompanies), Icons.domain_outlined, Icons.domain_rounded, const AdminCompaniesScreen()),
+          _Tab(S.t(t.tabFinance), Icons.account_balance_wallet_outlined, Icons.account_balance_wallet_rounded, const AdminFinanceScreen()),
+          _Tab(S.t(t.tabDisputes), Icons.gavel_outlined, Icons.gavel_rounded, const AdminDisputesScreen()),
+          _Tab(S.t(t.tabProfile), Icons.person_outline_rounded, Icons.person_rounded, const ProfileScreen()),
         ];
     }
   }
@@ -629,49 +630,49 @@ class _AppDrawer extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 10),
-            _DrawerItem(icon: Icons.home_rounded, label: t.tabHome, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.home_rounded, label: S.t(t.tabHome), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onHome(); }),
-            _DrawerItem(icon: Icons.search_rounded, label: t.tabServices, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.search_rounded, label: S.t(t.tabServices), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onSearch(); }),
-            _DrawerItem(icon: Icons.add_circle_rounded, label: t.newBooking, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.add_circle_rounded, label: S.t(t.newBooking), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onBooking(); }),
-            _DrawerItem(icon: Icons.receipt_long_rounded, label: t.myBookings, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.receipt_long_rounded, label: S.t(t.myBookings), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onBookings(); }),
-            _DrawerItem(icon: Icons.favorite_rounded, label: t.favorites, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.favorite_rounded, label: S.t(t.favorites), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onFavorites(); }),
             if (flags.walletEnabled)
-              _DrawerItem(icon: Icons.account_balance_wallet_rounded, label: t.wallet, surface: surface, textColor: textColor,
+              _DrawerItem(icon: Icons.account_balance_wallet_rounded, label: S.t(t.wallet), surface: surface, textColor: textColor,
                   onTap: () { Navigator.pop(context); onWallet(); }),
             if (flags.loyaltyEnabled)
-              _DrawerItem(icon: Icons.emoji_events_rounded, label: t.loyaltyPoints, surface: surface, textColor: textColor,
+              _DrawerItem(icon: Icons.emoji_events_rounded, label: S.t(t.loyaltyPoints), surface: surface, textColor: textColor,
                   onTap: () { Navigator.pop(context); onLoyalty(); }),
             if (flags.subscriptionsEnabled)
-              _DrawerItem(icon: Icons.workspace_premium_rounded, label: 'SmartGold', surface: surface, textColor: textColor,
+              _DrawerItem(icon: Icons.workspace_premium_rounded, label: S.t('SmartGold'), surface: surface, textColor: textColor,
                   onTap: () { Navigator.pop(context); Navigator.push(context, MaterialPageRoute(builder: (_) => const SubscriptionScreen())); }),
             if (flags.offersEnabled)
-              _DrawerItem(icon: Icons.card_giftcard_rounded, label: t.offersCoupons, surface: surface, textColor: textColor,
+              _DrawerItem(icon: Icons.card_giftcard_rounded, label: S.t(t.offersCoupons), surface: surface, textColor: textColor,
                   onTap: () { Navigator.pop(context); onOffers(); }),
-            _DrawerItem(icon: Icons.location_on_rounded, label: t.myAddresses, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.location_on_rounded, label: S.t(t.myAddresses), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onAddresses(); }),
             if (flags.tipsEnabled)
-              _DrawerItem(icon: Icons.lightbulb_rounded, label: 'نصائح التنظيف', surface: surface, textColor: textColor,
+              _DrawerItem(icon: Icons.lightbulb_rounded, label: S.t('نصائح التنظيف'), surface: surface, textColor: textColor,
                   onTap: () { Navigator.pop(context); Navigator.push(context, MaterialPageRoute(builder: (_) => const TipsScreen())); }),
             if (flags.sosEnabled)
-              _DrawerItem(icon: Icons.emergency_rounded, label: 'زر الطوارئ', surface: surface, textColor: textColor,
+              _DrawerItem(icon: Icons.emergency_rounded, label: S.t('زر الطوارئ'), surface: surface, textColor: textColor,
                   onTap: () { Navigator.pop(context); Navigator.push(context, MaterialPageRoute(builder: (_) => const SosScreen())); }),
-            _DrawerItem(icon: Icons.verified_user_rounded, label: 'توثيق الهوية (KYC)', surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.verified_user_rounded, label: S.t('توثيق الهوية (KYC)'), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); context.push('/kyc'); }),
-            _DrawerItem(icon: Icons.savings_rounded, label: 'أرباحي ومستحقاتي', surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.savings_rounded, label: S.t('أرباحي ومستحقاتي'), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); context.push('/settlements'); }),
-            _DrawerItem(icon: Icons.support_agent_rounded, label: 'تذكرة دعم', surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.support_agent_rounded, label: S.t('تذكرة دعم'), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); Navigator.push(context, MaterialPageRoute(builder: (_) => const SupportTicketScreen())); }),
-            _DrawerItem(icon: Icons.help_outline_rounded, label: t.faq, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.help_outline_rounded, label: S.t(t.faq), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onFaq(); }),
-            _DrawerItem(icon: Icons.accessibility_new_rounded, label: 'الإتاحة', surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.accessibility_new_rounded, label: S.t('الإتاحة'), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); Navigator.push(context, MaterialPageRoute(builder: (_) => const AccessibilityScreen())); }),
             _DrawerItem(icon: Icons.person_rounded, label: t.tabProfile, surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onProfile(); }),
-            _DrawerItem(icon: Icons.settings_rounded, label: t.settings, surface: surface, textColor: textColor,
+            _DrawerItem(icon: Icons.settings_rounded, label: S.t(t.settings), surface: surface, textColor: textColor,
                 onTap: () { Navigator.pop(context); onSettings(); }),
           ],
         ),
@@ -741,4 +742,6 @@ class _DrawerItem extends StatelessWidget {
     );
   }
 }
+
+
 

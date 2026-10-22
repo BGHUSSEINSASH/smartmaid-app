@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/ai/assistant_engine.dart';
 import '../core/responsive/breakpoints.dart';
+import '../l10n/strings/s.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/demo_data.dart';
@@ -150,8 +151,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           child: SmartSearchBar(
             controller: _ctrl,
             autofocus: widget.initialQuery == null,
-            hint: 'ابحث بالنص أو الصوت...',
-            aiInitialMessage: _query.isNotEmpty ? _query : 'ساعدني في العثور على عاملة',
+            hint: S.t('ابحث بالنص أو الصوت...'),
+            aiInitialMessage: _query.isNotEmpty ? _query : S.t('ساعدني في العثور على عاملة'),
             onSearch: _runSearch,
           ),
         ),
@@ -197,7 +198,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           SliverToBoxAdapter(child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text('الأكثر بحثاً', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
+              const T('الأكثر بحثاً', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
               const SizedBox(height: 12),
               Wrap(spacing: 10, runSpacing: 10, children: _popular.map((p) => GestureDetector(
                 onTap: () { _ctrl.text = p.substring(2).trim(); _runSearch(p.substring(2).trim()); },
@@ -480,4 +481,5 @@ class _ShimmerCardState extends State<_ShimmerCard> with SingleTickerProviderSta
     );
   }
 }
+
 

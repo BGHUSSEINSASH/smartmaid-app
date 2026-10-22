@@ -21,7 +21,7 @@ class SettingsScreen extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: isDark
             ? AppColors.backgroundDark
@@ -275,6 +275,7 @@ class _GroupCard extends StatelessWidget {
     );
   }
 }
+
 
 
 

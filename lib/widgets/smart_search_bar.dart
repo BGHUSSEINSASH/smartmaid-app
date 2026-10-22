@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import '../core/theme/app_theme.dart';
 import '../providers/platform_control_provider.dart';
+import '../providers/settings_provider.dart';
 import 'ai_chat_sheet.dart';
 
 /// SmartSearchBar — مكوّن بحث ذكي مشترك مع صوت وAI
@@ -41,6 +42,12 @@ class _SmartSearchBarState extends ConsumerState<SmartSearchBar>
   Timer? _silenceTimer;
   late final AnimationController _pulseCtrl;
   late final Animation<double> _pulseAnim;
+
+  /// لغة التعرّف الصوتي تتبع لغة التطبيق الحالية
+  String get _speechLocale {
+    final lang = ref.read(settingsProvider).language;
+    return lang == 'en' ? 'en_US' : 'ar_SA';
+  }
 
   @override
   void initState() {
@@ -113,7 +120,8 @@ class _SmartSearchBarState extends ConsumerState<SmartSearchBar>
       onSoundLevelChange: (level) {
         if (mounted) setState(() => _soundLevel = level.clamp(0, 10));
       },
-      localeId: 'ar_SA',
+      // لغة التعرّف الصوتي تتبع لغة التطبيق
+      localeId: _speechLocale,
       listenFor: const Duration(seconds: 30),
       pauseFor: const Duration(seconds: 2),
       partialResults: true,

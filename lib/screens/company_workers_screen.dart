@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import '../core/theme/app_theme.dart';
 import '../core/utils/platform_utils.dart';
+import '../l10n/strings/s.dart';
 import '../data/demo_data.dart';
 import '../data/models.dart';
 import '../providers/auth_provider.dart';
@@ -80,7 +81,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                     child: const Icon(Icons.person_add_rounded, color: AppColors.primary, size: 20),
                   ),
                   const SizedBox(width: 10),
-                  const Text('إضافة عاملة للفريق',
+                  const T('إضافة عاملة للفريق',
                       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)),
                   const Spacer(),
                   IconButton(icon: const Icon(Icons.close_rounded), onPressed: () => Navigator.pop(ctx)),
@@ -95,7 +96,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                       children: [
 
                         // ── صورة العاملة ──────────────────────────
-                        const Text('صورة العاملة',
+                        const T('صورة العاملة',
                             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
                         const SizedBox(height: 8),
                         Center(
@@ -111,13 +112,13 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                                     borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                                   ),
                                   child: Column(mainAxisSize: MainAxisSize.min, children: [
-                                    const Text('اختر مصدر الصورة',
+                                    const T('اختر مصدر الصورة',
                                         style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16)),
                                     const SizedBox(height: 16),
                                     Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                                       _ImgSourceBtn(
                                         icon: Icons.photo_library_rounded,
-                                        label: 'المعرض',
+                                        label: S.t('معرض'),
                                         onTap: () async {
                                           final img = await ImagePicker().pickImage(
                                               source: ImageSource.gallery, maxWidth: 512, maxHeight: 512, imageQuality: 85);
@@ -126,7 +127,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                                       ),
                                       _ImgSourceBtn(
                                         icon: Icons.camera_alt_rounded,
-                                        label: 'الكاميرا',
+                                        label: S.t('الكاميرا'),
                                         onTap: () async {
                                           final img = await ImagePicker().pickImage(
                                               source: ImageSource.camera, maxWidth: 512, maxHeight: 512, imageQuality: 85);
@@ -169,7 +170,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                             child: Center(
                               child: TextButton.icon(
                                 icon: const Icon(Icons.delete_outline_rounded, size: 16),
-                                label: const Text('حذف الصورة', style: TextStyle(fontSize: 12)),
+                                label: const T('حذف الصورة', style: TextStyle(fontSize: 12)),
                                 style: TextButton.styleFrom(foregroundColor: AppColors.error),
                                 onPressed: () => setSheet(() => pickedImage = null),
                               ),
@@ -180,8 +181,8 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                         // ── الاسم ─────────────────────────────────
                         TextField(
                           controller: nameCtrl,
-                          decoration: const InputDecoration(
-                            labelText: 'اسم العاملة *',
+                          decoration: InputDecoration(
+                            labelText: S.t('اسم العاملة *'),
                             prefixIcon: Icon(Icons.badge_rounded),
                             hintText: 'مثال: ماريا سانتوس',
                           ),
@@ -189,12 +190,12 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                         const SizedBox(height: 14),
 
                         // ── الجنسية / الدولة ─────────────────────
-                        const Text('الجنسية / الدولة',
+                        const T('الجنسية / الدولة',
                             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13)),
                         const SizedBox(height: 6),
                         TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'ابحث عن دولة...',
+                          decoration: InputDecoration(
+                            hintText: S.t('ابحث عن دولة...'),
                             prefixIcon: Icon(Icons.search_rounded, size: 18),
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -264,8 +265,8 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                         // ── التخصص ────────────────────────────────
                         TextField(
                           controller: categoryCtrl,
-                          decoration: const InputDecoration(
-                            labelText: 'التخصص',
+                          decoration: InputDecoration(
+                            labelText: S.t('التخصص'),
                             prefixIcon: Icon(Icons.work_rounded),
                             hintText: 'مثال: تنظيف منازل',
                           ),
@@ -276,10 +277,10 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                         TextField(
                           controller: bioCtrl,
                           maxLines: 3,
-                          decoration: const InputDecoration(
-                            labelText: 'نبذة عن العاملة',
-                            prefixIcon: Icon(Icons.info_outline_rounded),
-                            hintText: 'خبرة في التنظيف العميق والطبخ...',
+                          decoration: InputDecoration(
+                            labelText: S.t('نبذة عن العاملة'),
+                            prefixIcon: const Icon(Icons.info_outline_rounded),
+                            hintText: S.t('خبرة في التنظيف العميق والطبخ...'),
                             alignLabelWithHint: true,
                           ),
                         ),
@@ -325,9 +326,9 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                         TextField(
                           controller: rateCtrl,
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                          decoration: const InputDecoration(
-                            labelText: 'السعر بالساعة (دولار)',
-                            prefixIcon: Icon(Icons.attach_money_rounded),
+                          decoration: InputDecoration(
+                            labelText: S.t('السعر بالساعة (دولار)'),
+                            prefixIcon: const Icon(Icons.attach_money_rounded),
                             hintText: '20',
                           ),
                         ),
@@ -392,7 +393,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                               }
                             },
                             icon: const Icon(Icons.person_add_rounded, size: 20),
-                            label: const Text('إضافة العاملة',
+                            label: const T('إضافة العاملة',
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800)),
                           ),
                         ),
@@ -432,7 +433,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         icon: const Icon(Icons.person_add_rounded, size: 19),
-        label: const Text('عاملة جديدة', style: TextStyle(fontWeight: FontWeight.w700)),
+        label: const T('عاملة جديدة', style: TextStyle(fontWeight: FontWeight.w700)),
       ),
       body: Column(
         children: [
@@ -463,9 +464,9 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Icon(Icons.people_outline_rounded, size: 64, color: AppColors.muted),
                       const SizedBox(height: 12),
-                      const Text('لا توجد عاملات بعد', style: TextStyle(color: AppColors.muted)),
+                      const T('لا توجد عاملات بعد', style: TextStyle(color: AppColors.muted)),
                       const SizedBox(height: 8),
-                      const Text('اضغط + لإضافة عاملة جديدة',
+                      const T('اضغط + لإضافة عاملة جديدة',
                           style: TextStyle(color: AppColors.muted, fontSize: 12)),
                     ]),
                   )
@@ -485,7 +486,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                           context: context,
                           builder: (ctx) => AlertDialog(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            title: const Text('حذف العاملة؟'),
+                            title: const T('حذف العاملة؟'),
                             content: Text('سيتم إزالة ${w.name} من فريقك نهائياً.'),
                             actions: [
                               TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('إلغاء')),
@@ -657,4 +658,6 @@ class _ImgSourceBtn extends StatelessWidget {
     );
   }
 }
+
+
 

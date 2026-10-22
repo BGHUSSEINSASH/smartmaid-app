@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../core/theme/app_theme.dart';
+import '../l10n/strings/s.dart';
 import '../core/theme/adaptive.dart';
 import '../providers/currency_provider.dart';
 import '../providers/platform_control_provider.dart';
@@ -185,36 +186,36 @@ class _AdminScreenState extends ConsumerState<AdminScreen> {
                     childAspectRatio: 0.92,
                     children: [
                       if (_hasPerm(StaffPermission.manageUsers))
-                        _ActionCard(title: 'المستخدمون', icon: Icons.group_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0284C7), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminUsersManagementScreen()))),
+                        _ActionCard(title: S.t('المستخدمون'), icon: Icons.group_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0284C7), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminUsersManagementScreen()))),
                       if (_hasPerm(StaffPermission.manageCompanies))
-                        _ActionCard(title: 'الشركات', icon: Icons.domain_rounded, color: const Color(0xFFF3E8FF), iconColor: const Color(0xFF7E22CE), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCompaniesScreen()))),
+                        _ActionCard(title: S.t('الشركات'), icon: Icons.domain_rounded, color: const Color(0xFFF3E8FF), iconColor: const Color(0xFF7E22CE), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCompaniesScreen()))),
                       if (_hasPerm(StaffPermission.manageFinance))
-                        _ActionCard(title: 'المالية', icon: Icons.account_balance_wallet_rounded, color: const Color(0xFFDCFCE7), iconColor: const Color(0xFF166534), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminFinanceScreen()))),
-                      _ActionCard(title: 'النزاعات', icon: Icons.gavel_rounded, color: const Color(0xFFFFF7ED), iconColor: const Color(0xFFEA580C), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminDisputesScreen()))),
+                        _ActionCard(title: S.t('المالية'), icon: Icons.account_balance_wallet_rounded, color: const Color(0xFFDCFCE7), iconColor: const Color(0xFF166534), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminFinanceScreen()))),
+                      _ActionCard(title: S.t('النزاعات'), icon: Icons.gavel_rounded, color: const Color(0xFFFFF7ED), iconColor: const Color(0xFFEA580C), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminDisputesScreen()))),
                       if (_hasPerm(StaffPermission.manageDiscounts))
-                        _ActionCard(title: 'الخصومات', icon: Icons.percent_rounded, color: const Color(0xFFECFDF5), iconColor: const Color(0xFF059669), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminDiscountsScreen()))),
+                        _ActionCard(title: S.t('الخصومات'), icon: Icons.percent_rounded, color: const Color(0xFFECFDF5), iconColor: const Color(0xFF059669), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminDiscountsScreen()))),
                       if (_hasPerm(StaffPermission.manageCommissions))
-                        _ActionCard(title: 'العمولات', icon: Icons.price_change_rounded, color: const Color(0xFFFEF3C7), iconColor: const Color(0xFFB45309), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCommissionsScreen()))),
+                        _ActionCard(title: S.t('العمولات'), icon: Icons.price_change_rounded, color: const Color(0xFFFEF3C7), iconColor: const Color(0xFFB45309), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCommissionsScreen()))),
                       if (_hasPerm(StaffPermission.approveKyc))
-                        _ActionCard(title: 'مراجعة KYC', icon: Icons.verified_user_rounded, color: const Color(0xFFEDE9FE), iconColor: AppColors.primary, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminKycReviewScreen()))),
+                        _ActionCard(title: S.t('مراجعة KYC'), icon: Icons.verified_user_rounded, color: const Color(0xFFEDE9FE), iconColor: AppColors.primary, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminKycReviewScreen()))),
                       if (_hasPerm(StaffPermission.sendBroadcast))
-                        _ActionCard(title: 'الإشعارات', icon: Icons.notifications_rounded, color: const Color(0xFFFDF2F8), iconColor: const Color(0xFFDB2777), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPushNotificationsScreen()))),
+                        _ActionCard(title: S.t('الإشعارات'), icon: Icons.notifications_rounded, color: const Color(0xFFFDF2F8), iconColor: const Color(0xFFDB2777), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPushNotificationsScreen()))),
                       if (_hasPerm(StaffPermission.changeSystemSettings))
-                        _ActionCard(title: 'إعدادات النظام', icon: Icons.settings_rounded, color: const Color(0xFFF1F5F9), iconColor: const Color(0xFF475569), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminSystemSettingsScreen()))),
+                        _ActionCard(title: S.t('إعدادات النظام'), icon: Icons.settings_rounded, color: const Color(0xFFF1F5F9), iconColor: const Color(0xFF475569), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminSystemSettingsScreen()))),
                       if (_hasPerm(StaffPermission.managePlatformFlags))
-                        _ActionCard(title: 'التحكم بالمنصة', icon: Icons.tune_rounded, color: const Color(0xFFEEF2FF), iconColor: AppColors.primary, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPlatformControlScreen()))),
+                        _ActionCard(title: S.t('التحكم بالمنصة'), icon: Icons.tune_rounded, color: const Color(0xFFEEF2FF), iconColor: AppColors.primary, onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminPlatformControlScreen()))),
                       if (_hasPerm(StaffPermission.createCompany))
-                        _ActionCard(title: 'إنشاء شركة', icon: Icons.add_business_rounded, color: const Color(0xFFFCE7F3), iconColor: const Color(0xFFBE185D), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCreateCompanyScreen()))),
+                        _ActionCard(title: S.t('إنشاء شركة'), icon: Icons.add_business_rounded, color: const Color(0xFFFCE7F3), iconColor: const Color(0xFFBE185D), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCreateCompanyScreen()))),
                       if (_hasPerm(StaffPermission.manageSubscriptions))
-                        _ActionCard(title: 'الاشتراكات', icon: Icons.card_membership_rounded, color: const Color(0xFFF0FDF4), iconColor: const Color(0xFF16A34A), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminSubscriptionsScreen()))),
+                        _ActionCard(title: S.t('الاشتراكات'), icon: Icons.card_membership_rounded, color: const Color(0xFFF0FDF4), iconColor: const Color(0xFF16A34A), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminSubscriptionsScreen()))),
                       if (_hasPerm(StaffPermission.respondToChats))
-                        _ActionCard(title: 'ردود تلقائية', icon: Icons.auto_awesome_rounded, color: const Color(0xFFFFF7ED), iconColor: const Color(0xFFD97706), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminAutoRepliesScreen()))),
+                        _ActionCard(title: S.t('ردود تلقائية'), icon: Icons.auto_awesome_rounded, color: const Color(0xFFFFF7ED), iconColor: const Color(0xFFD97706), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminAutoRepliesScreen()))),
                       if (_hasPerm(StaffPermission.respondToChats))
-                        _ActionCard(title: 'المحادثات', icon: Icons.chat_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0369A1), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminConversationsScreen()))),
-                      _ActionCard(title: 'فريق الإدارة', icon: Icons.manage_accounts_rounded, color: const Color(0xFFF3E8FF), iconColor: const Color(0xFF9333EA), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminStaffScreen()))),
+                        _ActionCard(title: S.t('المحادثات'), icon: Icons.chat_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0369A1), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminConversationsScreen()))),
+                      _ActionCard(title: S.t('فريق الإدارة'), icon: Icons.manage_accounts_rounded, color: const Color(0xFFF3E8FF), iconColor: const Color(0xFF9333EA), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminStaffScreen()))),
                       if (_hasPerm(StaffPermission.issueCompensations))
-                        _ActionCard(title: 'التعويضات', icon: Icons.volunteer_activism_rounded, color: const Color(0xFFFFF1F2), iconColor: const Color(0xFFE11D48), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCompensationsScreen()))),
-                      _ActionCard(title: 'سياسة الخصوصية', icon: Icons.privacy_tip_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0369A1), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()))),
+                        _ActionCard(title: S.t('التعويضات'), icon: Icons.volunteer_activism_rounded, color: const Color(0xFFFFF1F2), iconColor: const Color(0xFFE11D48), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AdminCompensationsScreen()))),
+                      _ActionCard(title: S.t('سياسة الخصوصية'), icon: Icons.privacy_tip_rounded, color: const Color(0xFFE0F2FE), iconColor: const Color(0xFF0369A1), onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()))),
                     ],
                   ),
 
@@ -577,6 +578,7 @@ class _MaintenanceQuickCard extends ConsumerWidget {
     );
   }
 }
+
 
 
 

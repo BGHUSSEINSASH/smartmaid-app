@@ -93,7 +93,7 @@ class _UnifiedSettingsState extends ConsumerState<UnifiedSettingsScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Directionality.of(context),
       child: Scaffold(
         backgroundColor: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
         appBar: AppBar(
@@ -531,4 +531,5 @@ class _UnifiedSettingsState extends ConsumerState<UnifiedSettingsScreen> {
   String _formatDate(DateTime dt) =>
       '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
 }
+
 

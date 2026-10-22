@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/painter/logo_painter.dart';
 import '../../../core/responsive/breakpoints.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../l10n/strings/s.dart';
 import '../../../providers/auth_provider.dart';
 
 /// شاشة تسجيل الدخول الجديدة — بالرقم فقط
@@ -83,11 +84,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
               ]),
               const SizedBox(height: 32),
-              Text('أهلاً بك',
+              Text(S.t('أهلاً بك'),
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900,
                       color: isDark ? Colors.white : AppColors.primary)),
               const SizedBox(height: 8),
-              Text('أدخل رقم هاتفك للمتابعة',
+              Text(S.t('أدخل رقم هاتفك للمتابعة'),
                   style: TextStyle(fontSize: 15, color: AppColors.muted)),
               const SizedBox(height: 36),
               // Phone field
@@ -163,7 +164,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 16),
               Center(child: TextButton(
                 onPressed: () => context.push('/register/role'),
-                child: const Text('ليس لديك حساب؟ سجّل الآن'),
+                child: Text(S.t('ليس لديك حساب؟ سجّل الآن')),
               )),
             ],
           ),
@@ -228,4 +229,5 @@ class _DevQuickLogin extends ConsumerWidget {
     );
   }
 }
+
 

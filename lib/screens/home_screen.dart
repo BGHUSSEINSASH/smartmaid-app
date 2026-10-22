@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../core/nav/app_nav.dart';
 import '../core/responsive/breakpoints.dart';
+import '../l10n/strings/s.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/demo_data.dart';
@@ -302,8 +303,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   if (flags.annualBookingEnabled) ...[
                     _QuickCard(
                       icon: '📅',
-                      label: 'حجز سنوي',
-                      sublabel: 'وفّر 30%',
+                      label: S.t('حجز سنوي'),
+                      sublabel: S.t('وفّر 30%'),
                       gradient: AppColors.heroGradient,
                       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AnnualBookingScreen())),
                     ),
@@ -312,8 +313,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   if (flags.aiChatEnabled) ...[
                     _QuickCard(
                       icon: '🤖',
-                      label: 'مساعد AI',
-                      sublabel: 'ذكاء اصطناعي',
+                      label: S.t('مساعد AI'),
+                      sublabel: S.t('ذكاء اصطناعي'),
                       gradient: LinearGradient(colors: [AppColors.accent, AppColors.primary], begin: Alignment.topLeft, end: Alignment.bottomRight),
                       onTap: () => showModalBottomSheet(
                         context: context,
@@ -326,8 +327,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ],
                   _QuickCard(
                     icon: '⚡',
-                    label: 'حجز سريع',
-                    sublabel: 'خلال دقيقة',
+                    label: S.t('حجز سريع'),
+                    sublabel: S.t('خلال دقيقة'),
                     gradient: LinearGradient(colors: [const Color(0xFF0353A4), AppColors.primary], begin: Alignment.topLeft, end: Alignment.bottomRight),
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BookingScreen())),
                   ),
@@ -335,7 +336,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const SizedBox(width: 10),
                     _QuickCard(
                       icon: '🏆',
-                      label: 'اشتراك Pro',
+                      label: S.t('اشتراك Pro'),
                       sublabel: 'Gold وPlatinum',
                       gradient: LinearGradient(colors: [const Color(0xFFB45309), const Color(0xFFF59E0B)], begin: Alignment.topLeft, end: Alignment.bottomRight),
                       onTap: () => context.push('/subscription'),
@@ -345,8 +346,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const SizedBox(width: 10),
                     _QuickCard(
                       icon: '🎁',
-                      label: 'العروض',
-                      sublabel: 'خصومات',
+                      label: S.t('العروض'),
+                      sublabel: S.t('خصومات'),
                       gradient: LinearGradient(colors: [const Color(0xFF16A34A), const Color(0xFF22C55E)], begin: Alignment.topLeft, end: Alignment.bottomRight),
                       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const OffersScreen())),
                     ),
@@ -1185,4 +1186,5 @@ class _QuickCard extends StatelessWidget {
     );
   }
 }
+
 
