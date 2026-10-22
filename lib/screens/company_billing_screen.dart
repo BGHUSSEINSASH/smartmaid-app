@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -6,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import '../core/theme/app_theme.dart';
+import '../core/utils/platform_utils.dart';
 import '../core/theme/adaptive.dart';
 import '../data/models.dart';
 import '../providers/auth_provider.dart';
@@ -235,13 +235,14 @@ class CompanyBillingScreen extends ConsumerWidget {
       ));
 
       final dir = await getApplicationDocumentsDirectory();
-      final path = '${dir.path}/billing_${DateTime.now().millisecondsSinceEpoch}.pdf';
-      final file = File(path);
-      await file.writeAsBytes(await doc.save());
+      final fileName =
+          'billing_${DateTime.now().millisecondsSinceEpoch}.pdf';
+      final bytes = await doc.save();
+      final savedPath = await writePdfFile(dir.path, fileName, bytes);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('✅ تم تصدير PDF: $path'),
+          content: Text('✅ تم تصدير PDF: $savedPath'),
           behavior: SnackBarBehavior.floating,
           backgroundColor: AppColors.success,
         ));
@@ -279,3 +280,4 @@ class _BillingRow extends StatelessWidget {
     ]),
   );
 }
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../core/theme/app_theme.dart';
 import '../data/models.dart';
 import '../providers/auth_provider.dart';
@@ -248,7 +249,7 @@ class _UnifiedSettingsState extends ConsumerState<UnifiedSettingsScreen> {
                 title: const Text('الأمان المتقدم', style: TextStyle(fontWeight: FontWeight.w700)),
                 subtitle: const Text('قفل PIN، البصمة، الأجهزة النشطة'),
                 trailing: const Icon(Icons.chevron_left_rounded),
-                onTap: () => Navigator.pushNamed(context, '/security'),
+                onTap: () => context.push('/security'),
               ),
               if (user.role != AppRole.admin)
                 _switchRow('إخفاء رقم الهاتف', Icons.phone_locked_rounded, false, (_) {}),
@@ -271,7 +272,7 @@ class _UnifiedSettingsState extends ConsumerState<UnifiedSettingsScreen> {
                     title: const Text('عناويني', style: TextStyle(fontWeight: FontWeight.w700)),
                     subtitle: Text('${addresses.length} عنوان محفوظ'),
                     trailing: const Icon(Icons.chevron_left_rounded),
-                    onTap: () => Navigator.pushNamed(context, '/addresses'),
+                    onTap: () => context.push('/addresses'),
                   ),
                 if (user.role == AppRole.customer)
                   ListTile(
@@ -337,7 +338,7 @@ class _UnifiedSettingsState extends ConsumerState<UnifiedSettingsScreen> {
                     ])),
                     if (!sub.isActive)
                       TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/subscription'),
+                        onPressed: () => context.push('/subscription'),
                         child: const Text('ترقية'),
                       ),
                   ]),
@@ -530,3 +531,4 @@ class _UnifiedSettingsState extends ConsumerState<UnifiedSettingsScreen> {
   String _formatDate(DateTime dt) =>
       '${dt.day.toString().padLeft(2, '0')}/${dt.month.toString().padLeft(2, '0')}/${dt.year}';
 }
+

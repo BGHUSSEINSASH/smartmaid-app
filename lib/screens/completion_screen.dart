@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/theme/app_theme.dart';
-import '../widgets/ai_app_bar_button.dart';
 import '../core/theme/adaptive.dart';
 import '../data/models.dart';
 import '../data/repository.dart';
@@ -293,6 +292,7 @@ class _SignaturePainter extends CustomPainter {
   bool shouldRepaint(covariant _SignaturePainter old) =>
       old.points.length != points.length;
 }
+
 
 
 

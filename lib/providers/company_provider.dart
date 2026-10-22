@@ -28,27 +28,13 @@ class CompanyWorkersNotifier extends StateNotifier<List<WorkerModel>> {
   void addWorker(WorkerModel worker) => state = [...state, worker];
   void removeWorker(String id) =>
       state = state.where((w) => w.id != id).toList();
+
+  /// تبديل حالة التوفّر — يحافظ على كل بيانات العاملة
+  /// (بما فيها الدولة و verified — لا يُفقدان)
   void toggleAvailability(String id) {
-    state = state.map((w) {
-      if (w.id == id) {
-        return WorkerModel(
-          id: w.id,
-          name: w.name,
-          category: w.category,
-          imageUrl: w.imageUrl,
-          rating: w.rating,
-          reviewCount: w.reviewCount,
-          jobsCompleted: w.jobsCompleted,
-          hourlyRate: w.hourlyRate,
-          location: w.location,
-          isAvailable: !w.isAvailable,
-          skills: w.skills,
-          about: w.about,
-          companyId: w.companyId,
-        );
-      }
-      return w;
-    }).toList();
+    state = state
+        .map((w) => w.id == id ? w.copyWith(isAvailable: !w.isAvailable) : w)
+        .toList();
   }
 }
 

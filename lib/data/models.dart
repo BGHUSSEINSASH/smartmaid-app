@@ -364,6 +364,42 @@ class WorkerModel {
 
   String get image => imageUrl;
   int get experienceYears => (jobsCompleted / 28).ceil();
+
+  /// نسخة معدَّلة — تحافظ على كل الحقول غير المُحدَّدة
+  WorkerModel copyWith({
+    String? id,
+    String? name,
+    String? category,
+    String? imageUrl,
+    double? rating,
+    int? reviewCount,
+    int? jobsCompleted,
+    double? hourlyRate,
+    String? location,
+    bool? isAvailable,
+    List<String>? skills,
+    String? about,
+    String? companyId,
+    bool? verified,
+    String? nationalityCountry,
+  }) =>
+      WorkerModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        category: category ?? this.category,
+        imageUrl: imageUrl ?? this.imageUrl,
+        rating: rating ?? this.rating,
+        reviewCount: reviewCount ?? this.reviewCount,
+        jobsCompleted: jobsCompleted ?? this.jobsCompleted,
+        hourlyRate: hourlyRate ?? this.hourlyRate,
+        location: location ?? this.location,
+        isAvailable: isAvailable ?? this.isAvailable,
+        skills: skills ?? this.skills,
+        about: about ?? this.about,
+        companyId: companyId ?? this.companyId,
+        verified: verified ?? this.verified,
+        nationalityCountry: nationalityCountry ?? this.nationalityCountry,
+      );
 }
 
 class CompanyModel {

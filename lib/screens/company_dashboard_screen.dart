@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/adaptive.dart';
 import '../data/models.dart';
@@ -395,7 +396,7 @@ class _CompanyDashboardScreenState extends ConsumerState<CompanyDashboardScreen>
                       icon: Icons.receipt_long_rounded,
                       color: const Color(0xFFFEF3C7),
                       iconColor: const Color(0xFF92400E),
-                      onTap: () => _push(const CompanyBillingScreen()),
+                      onTap: () => context.push('/company/billing'),
                     ),
                     ],
                   ],

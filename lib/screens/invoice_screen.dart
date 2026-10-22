@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'dart:io';
 import '../core/theme/app_theme.dart';
+import '../core/utils/platform_utils.dart';
 import '../data/models.dart';
 import '../providers/booking_provider.dart';
 import '../providers/currency_provider.dart';
@@ -100,9 +100,8 @@ class InvoiceScreen extends ConsumerWidget {
       ),
     );
     final dir = await getApplicationDocumentsDirectory();
-    final file = File('${dir.path}/invoice_${b.id}.pdf');
-    await file.writeAsBytes(await doc.save());
-    return file.path;
+    final bytes = await doc.save();
+    return writePdfFile(dir.path, 'invoice_${b.id}.pdf', bytes);
   }
 
   static pw.TableRow _row(String k, String v) => pw.TableRow(

@@ -1,9 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import '../core/theme/app_theme.dart';
-import '../core/theme/adaptive.dart';
+import '../core/utils/platform_utils.dart';
 import '../data/demo_data.dart';
 import '../data/models.dart';
 import '../providers/auth_provider.dart';
@@ -146,7 +145,7 @@ class _CompanyWorkersScreenState extends ConsumerState<CompanyWorkersScreen> {
                                 radius: 48,
                                 backgroundColor: AppColors.primaryLight,
                                 backgroundImage: pickedImage != null
-                                    ? FileImage(File(pickedImage!.path)) as ImageProvider
+                                    ? localImageProvider(pickedImage!.path)
                                     : null,
                                 child: pickedImage == null
                                     ? const Icon(Icons.person_rounded, size: 40, color: AppColors.primary)
@@ -526,7 +525,7 @@ class _WorkerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final isLocalImage = worker.imageUrl.startsWith('/') || worker.imageUrl.startsWith('file');
     final ImageProvider img = isLocalImage
-        ? FileImage(File(worker.imageUrl))
+        ? localImageProvider(worker.imageUrl)
         : NetworkImage(worker.imageUrl) as ImageProvider;
 
     return Container(
@@ -658,3 +657,4 @@ class _ImgSourceBtn extends StatelessWidget {
     );
   }
 }
+

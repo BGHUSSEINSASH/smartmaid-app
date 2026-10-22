@@ -118,11 +118,6 @@ final settingsProvider = StateNotifierProvider<SettingsNotifier, SettingsState>(
   (ref) => SettingsNotifier(),
 );
 
-class CurrencyNotifier2 extends StateNotifier<String> {
-  CurrencyNotifier2() : super('usd');
-  void set(String code) => state = code;
-}
-
 final onboardingDoneProvider = FutureProvider<bool>((ref) async {
   return SettingsPersistence.loadBool(SettingsPersistence.kOnboarded);
 });

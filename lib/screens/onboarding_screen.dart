@@ -157,7 +157,3 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     );
   }
 }
-
-class onboarding_screen extends OnboardingScreen {
-  const onboarding_screen({super.key});
-}

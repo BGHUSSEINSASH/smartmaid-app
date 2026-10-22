@@ -9,7 +9,6 @@ import '../data/models.dart';
 import '../providers/address_provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/booking_provider.dart';
-import '../providers/currency_provider.dart';
 import '../providers/favorites_provider.dart';
 import '../providers/loyalty_provider.dart';
 import '../providers/subscription_provider.dart';
@@ -552,5 +551,6 @@ class _MenuItem extends StatelessWidget {
     );
   }
 }
+
 
 

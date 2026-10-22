@@ -1,5 +1,4 @@
-import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import '../../../core/utils/platform_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_theme.dart';
 
@@ -82,8 +81,7 @@ class SocialButton extends StatelessWidget {
 
   /// هل تُعرض Apple على هذه المنصة؟ (iOS/macOS فقط)
   static bool get showApple {
-    if (kIsWeb) return false;
-    return Platform.isIOS || Platform.isMacOS;
+    return isApplePlatform;
   }
 
   @override
@@ -171,3 +169,4 @@ class AuthDivider extends StatelessWidget {
     );
   }
 }
+

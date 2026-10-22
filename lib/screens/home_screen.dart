@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../core/nav/app_nav.dart';
 import '../core/responsive/breakpoints.dart';
 import '../core/theme/app_theme.dart';
@@ -337,7 +338,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       label: 'اشتراك Pro',
                       sublabel: 'Gold وPlatinum',
                       gradient: LinearGradient(colors: [const Color(0xFFB45309), const Color(0xFFF59E0B)], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                      onTap: () => Navigator.pushNamed(context, '/subscription'),
+                      onTap: () => context.push('/subscription'),
                     ),
                   ],
                   if (flags.offersEnabled) ...[

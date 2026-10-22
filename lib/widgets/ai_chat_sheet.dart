@@ -293,10 +293,9 @@ class _AiChatSheetState extends ConsumerState<AiChatSheet> {
                 duration: const Duration(milliseconds: 200),
                 width: 42, height: 42,
                 decoration: BoxDecoration(
-                  gradient: _listening ? null : null,
-                  color: _listening ? AppColors.error.withValues(alpha: .12) : AppColors.primary.withValues(alpha: .1),
+                  color: _listening ? AppColors.error.withOpacity(.12) : AppColors.primary.withOpacity(.1),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: _listening ? AppColors.error.withValues(alpha: .4) : AppColors.primary.withValues(alpha: .2)),
+                  border: Border.all(color: _listening ? AppColors.error.withOpacity(.4) : AppColors.primary.withOpacity(.2)),
                 ),
                 child: Icon(
                   _listening ? Icons.stop_rounded : Icons.mic_rounded,
